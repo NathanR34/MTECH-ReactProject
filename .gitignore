@@ -1,0 +1,6 @@
+.vscode
+*DS_Store
+log.txt
+
+node_modules
+/.next/
