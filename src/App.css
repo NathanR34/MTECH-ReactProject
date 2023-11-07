@@ -2,6 +2,7 @@
   grid-area: 1/1/1/1;
   display: grid;
   grid: 1fr / 1fr;
+  align-self: start;
+  justify-self: center;
   overflow: hidden;
 }
-
