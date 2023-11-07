@@ -1,11 +1,6 @@
 
 import {useRef, useEffect, useState} from 'react';
 
-let c = 0;
-function count(){
-    console.log(++c);
-}
-
 function Graph(){
     const [canvas, setCanvas] = useState(null);
     const [ctx, setCtx] = useState(null);
