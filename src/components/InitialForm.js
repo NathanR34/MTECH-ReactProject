@@ -1,45 +1,61 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import '../App.js'
 import { newUser } from '../App.js';
 
 
+
+
 function LogIn() {
 
+  const [userMoney, setUserMoney ] = useState(0)
+  const [funds, setFunds] = useState('')  
+  const [monthlyIncome, setMonthlyIncome] = useState('')
+  const [firstName, setFirstName] = useState('')
 
-    const [userMoney, setUserMoney ] = useState(0)
-    const [funds, setFunds] = useState(0)  
-  
-  
-  
-    const checkValue = (e) => {
-      setFunds(e.target.value + '.00')
-      console.log(funds)
-    }
-    
-    const addAmountHandler = (e) => {
-      setUserMoney(e.target.previousSibling.value)
-      newUser.customerIncome = e.target.previousSibling.value
-      console.log(userMoney)
-    }
-  
-    return (
-    <div className="int-form">
-        {/* <div className="app-info"></div> */}
-        <div className="user-info">
-            <div className="monthly-income">
-                <input placeholder="Enter First Name"></input>
-            </div>
-            <div className="user-int-funds">
-                <p>Add Your Monthly Income Here:</p>
-                <div>{funds}</div>
-                <input type="number" onChange={checkValue} placeholder="Enter Monthly Income..."></input>
-                <button onClick={addAmountHandler}>Add</button>
-            </div>
-        </div>
-        
-    </div>
-        
-    );
+  const checkValue = (e) => {
+    let netWorth = e.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    setFunds(netWorth)
+    console.log(funds)
   }
   
-  export default LogIn;
+  const addUserInfo = (e) => {
+    setUserMoney(e.target.previousSibling.previousSibling.firstChild.nextSibling.value)
+    newUser.customerMoney = e.target.previousSibling.previousSibling.firstChild.nextSibling.value
+    newUser.customerIncome = e.target.previousSibling.firstChild.nextSibling.value
+    e.target.previousSibling.previousSibling.firstChild.nextSibling.value = ""
+    console.log(newUser)
+  }
+
+  const addMonthlyIncome = (e) => {
+    let income = e.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    setMonthlyIncome(income)
+  }
+
+  const addFirstName = (e) => {
+    setFirstName(e.target.value)
+    newUser.customerFirstName = e.target.value
+  }
+
+
+
+  return (
+    <div className="user-form">
+      <div>
+        <p>First Name: {firstName}</p>
+        <input type="text" placeholder="Enter First Name..." onChange={addFirstName}></input>
+      </div>
+      <div className="user-int-funds">
+          <div>Current Net Worth: {funds}</div>
+          <input type="number" onChange={checkValue} placeholder="Enter Current Net Worth..."></input>
+      </div>
+      <div>
+        <p>Monthly Income: {monthlyIncome}</p>
+        <input type="number" placeholder="Enter Mothly Income..." onChange={addMonthlyIncome}></input>
+      </div>
+      <button onClick={addUserInfo}>Add</button>
+    </div>
+
+  );
+}
+
+export default LogIn;
