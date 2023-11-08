@@ -6,3 +6,26 @@
   justify-self: center;
   overflow: hidden;
 }
+header{
+  background-color: rgb(85, 136, 255);
+  box-shadow: 10px -16px teal;
+  text-align: center;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mainNav{
+  display: flex;
+  height: 1rem;
+  list-style-type: none;
+  align-content: center;
+}
+.mainNav > *{
+  padding:  0px 10px;
+
+}
+.mainNav > * :hover{
+  background-color: grey;
+}
+
