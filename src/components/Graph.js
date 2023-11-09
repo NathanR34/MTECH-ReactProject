@@ -1,33 +1,37 @@
 
 import {useRef, useEffect, useState} from 'react';
 
-function Graph(){
-    const [canvas, setCanvas] = useState(null);
-    const [ctx, setCtx] = useState(null);
-    const canvasRef = useRef(null);
+import { smoothBezier } from '../util/geom'; 
+import { drawPath } from '../util/draw';
 
-    function draw(){
-        ctx.fillRect(50,50,50,50);
-        count();
-    }
-    useEffect(()=>{
-        if(canvasRef.current){
-            let canvasElement = canvasRef.current;
-            setCanvas(canvasElement);
-            setCtx(canvasElement.getContext("2d"));
-        } else {
-            setCanvas(null);
-            setCtx(null);
-        }
-    }, [canvasRef]);
-    useEffect(()=>{
+let Graph;
+{   
+    function draw(ctx, data){
         if(ctx){
-            draw();
+            let path = smoothBezier.path(...data);
+            drawPath.fill.mix(ctx, path);
         }
-    }, [ctx]);
+    }
+    Graph = function Graph({points}){
+        const canvasRef = useRef(null);
+        const [ctx, setCtx] = useState(null);
+        const [data, setData] = useState(smoothBezier.dataFromPoints(points));
+
+        useEffect(()=>{
+            draw(ctx, data);
+        }, [data, ctx]);
+
+        useEffect(()=>{
+            if(canvasRef.current){
+                setCtx(canvasRef.current.getContext("2d"));
+            } else {
+                setCtx(null);
+            }
+        }, [canvasRef]);
 
 
-    return <canvas onClick={toggleRender} ref={canvasRef}></canvas>;
+        return <canvas onClick={toggleRender} ref={canvasRef}></canvas>;
+    }
 }
 
 export default Graph;
