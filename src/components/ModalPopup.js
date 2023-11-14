@@ -1,5 +1,3 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
 export default function ModalPopup() {
   console.log("clicked");
   return (
@@ -32,13 +30,19 @@ export default function ModalPopup() {
                 <label>Income Frequency</label>
                 <select
                   name="income-frequency"
-                  // onClick={changeSelections}
-                  // onChange={addIncomeFrequency}
+                  onClick={changeSelections}
+                  onChange={addIncomeFrequency}
                 >
-                  <option>Select Payment Frequency</option>
-                  <option value="bi-weekly">Bi-Weekly</option>
-                  <option value="semi-monthly">Semi-Monthly</option>
-                  <option value="weekly">Weekly</option>{" "}
+                  {isSelected === false ? (
+                    <option>Select Payment Frequency</option>
+                  ) : null}
+                  {isSelected && (
+                    <>
+                      <option value="bi-weekly">Bi-Weekly</option>
+                      <option value="semi-monthly">Semi-Monthly</option>
+                      <option value="weekly">Weekly</option>{" "}
+                    </>
+                  )}
                 </select>
                 <label>Income Per Paycheck</label>
                 <input
