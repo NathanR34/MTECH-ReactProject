@@ -6,7 +6,7 @@
   justify-self: center;
   overflow: hidden;
 }
-header{
+header {
   background-color: rgb(85, 136, 255);
   box-shadow: 10px -16px teal;
   text-align: center;
@@ -15,17 +15,38 @@ header{
   justify-content: space-between;
   align-items: center;
 }
-.mainNav{
+.mainNav {
   display: flex;
   height: 1rem;
   list-style-type: none;
   align-content: center;
 }
-.mainNav > *{
-  padding:  0px 10px;
-
+.mainNav > * {
+  padding: 0px 10px;
 }
-.mainNav > * :hover{
+.mainNav > * :hover {
   background-color: grey;
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(17, 17, 17, 0.695);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background-color: rgb(227, 227, 227);
+  padding: 15px;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  height: 350px;
+  border-radius: 15px;
+}
