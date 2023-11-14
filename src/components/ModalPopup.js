@@ -1,4 +1,51 @@
+import { useState } from "react"
+import {User} from '../App'
+
+
+
 export default function ModalPopup() {
+
+  const [isSelected, setIsSelected] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
+
+  const addUserName = (e) => {
+    User.firstName = e.target.value
+  }
+
+  const addCurrentMoney = (e) => {
+    User.cash = e.target.value
+  }
+
+  const addIncomeFrequency = (e) => {
+    User.incomeFrequency = e.target.value
+  }
+
+  const changeSelections = () => {
+    setIsSelected(true)
+  }
+
+  const addIncome = (e) =>{
+    User.income = e.target.value
+  }
+
+  const addUser = (e) => {
+    e.preventDefault()
+    if(User.firstName === null || User.firstName === ''){
+      return alert('Please Include Your First Name')
+    }
+    if(User.cash === null || User.cash === ''){
+      return alert('Please Include Your Current Cash')
+    }
+    if(User.income === null || User.income === ''){
+      return alert('Please Include Your Current Income')
+    }
+    console.log(User)
+    setIsLoggedIn(true)
+
+  }
+
+
   console.log("clicked");
   return (
     <div className="background">
@@ -19,18 +66,18 @@ export default function ModalPopup() {
                   name="firstName"
                   type="text"
                   placeholder="First Name..."
-                  // onChange={addUserName}
+                   onChange={addUserName}
                 />
                 <label>Current Cash</label>
                 <input
                   type="number"
                   placeholder="Your Current Money..."
-                  // onChange={addCurrentMoney}
+                   onChange={addCurrentMoney}
                 />
                 <label>Income Frequency</label>
                 <select
                   name="income-frequency"
-                  onClick={changeSelections}
+                   onClick={changeSelections}
                   onChange={addIncomeFrequency}
                 >
                   {isSelected === false ? (
@@ -48,10 +95,10 @@ export default function ModalPopup() {
                 <input
                   type="number"
                   placeholder="Paycheck Amount..."
-                  //onClick={addIncome}
+                  onClick={addIncome}
                 />
 
-                <button className="submit-new-user" /*onClick={addUser} */>
+                <button className="submit-new-user" onClick={addUser} >
                   Submit
                 </button>
               </div>

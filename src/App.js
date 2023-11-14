@@ -3,14 +3,16 @@ import LogIn from "./components/InitialForm";
 import ModalPopup from "./components/ModalPopup";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-export const newUser = {
-  customerFirstName: "",
-  customerIncome: 0,
-  customerMoney: 0,
-};
-export const appData = {
-  newUser: newUser,
-};
+export const User = {
+  firstName: null,
+  cash: null,
+  incomeFrequency: 'bi-weekly',
+  income: null,
+  annual: 0
+}
+// export const appData = {
+//   newUser: newUser,
+// };
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
               <li>Home</li>
               <li>Budget</li>
               <li>Overview</li>
-              <li className="pointer" onClick={ModalPopup}>
+              <li className="pointer">
                 {" "}
                 <Link className="link" to="/components/ModalPopup">
                   Login
@@ -41,7 +43,7 @@ function App() {
           </Router>
           <div className="logo">Budget App</div>{" "}
         </header>
-        <LogIn />
+        {/* <LogIn /> */}
       </div>
     </div>
   );
