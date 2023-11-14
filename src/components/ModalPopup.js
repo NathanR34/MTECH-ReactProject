@@ -1,4 +1,7 @@
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 export default function ModalPopup() {
+  console.log("clicked");
   return (
     <div className="background">
       <header>
@@ -9,7 +12,10 @@ export default function ModalPopup() {
           <div className="form-container">
             <form className="int-user-form">
               <div className="modal-content">
-                <h1 className="modal-title">Enter your info here</h1>
+                <div className="modal-header">
+                  <h1 className="modal-title">Enter your info here</h1>
+                  <p className="close"> X </p>
+                </div>
                 <label name="firstName">First Name</label>
                 <input
                   name="firstName"

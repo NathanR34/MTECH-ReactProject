@@ -1,6 +1,7 @@
 import "./App.css";
 import LogIn from "./components/InitialForm";
 import ModalPopup from "./components/ModalPopup";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 export const newUser = {
   customerFirstName: "",
@@ -18,15 +19,29 @@ function App() {
         {" "}
         <header>
           {" "}
-          <ul className="mainNav">
-            <li>Home</li>
-            <li>Budget</li>
-            <li>Overview</li> <li>LogIn </li>
-          </ul>
+          <Router>
+            <ul className="mainNav">
+              <li>Home</li>
+              <li>Budget</li>
+              <li>Overview</li>
+              <li className="pointer" onClick={ModalPopup}>
+                {" "}
+                <Link className="link" to="/components/ModalPopup">
+                  Login
+                </Link>
+              </li>
+            </ul>
+            <Routes>
+              <Route
+                exact
+                path="/components/ModalPopup"
+                element={<ModalPopup />}
+              ></Route>
+            </Routes>
+          </Router>
           <div className="logo">Budget App</div>{" "}
         </header>
         <LogIn />
-        <ModalPopup />
       </div>
     </div>
   );

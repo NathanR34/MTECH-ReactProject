@@ -1,10 +1,5 @@
 .App {
-  grid-area: 1/1/1/1;
-  display: grid;
-  grid: 1fr / 1fr;
-  align-self: start;
-  justify-self: center;
-  overflow: hidden;
+  text-align: center;
 }
 header {
   background-color: rgb(85, 136, 255);
@@ -49,4 +44,26 @@ header {
   flex-flow: column nowrap;
   height: 350px;
   border-radius: 15px;
+}
+.pointer {
+  cursor: pointer;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+.close {
+  color: red;
+  text-decoration: underline;
+}
+.link {
+  text-decoration: none;
+  color: black;
+  padding: 12px;
+  margin: 0;
+}
+.link:hover {
+  background-color: #4066be;
+  color: white;
 }
