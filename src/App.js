@@ -20,42 +20,33 @@ export const User = {
 // };
 
 function App() {
-  
+  const [modalDisplay, setModalDisplay] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
+  const showModal = (e) => {
+    console.log(e.target)
+    setModalDisplay(true)
+  }
+
+
   return (
     <div className="App">
       <div className="mainContent">
-        {" "}
         <header>
-          {" "}
-          <Router>
             <ul className="mainNav">
               <li>Home</li>
               <li>Budget</li>
               <li>Overview</li>
-              <li className="pointer">
-                {" "}
-                <Link className="link" to="/components/ModalPopup">
-                  Login
-                </Link>
-              </li>
+              <li className="pointer" onClick={showModal} > Login</li>
             </ul>
-            <Routes>
-              <Route
-                exact
-                path="/components/ModalPopup"
-                element={<ModalPopup 
-                  loggedIn={isLoggedIn}
-                  setLogIn ={setIsLoggedIn}
-                />}
-              ></Route>
-            </Routes>
-          </Router>
           <div className="logo">Budget App</div>{" "}
         </header>
         {/* <LogIn /> */}
-
+        <ModalPopup 
+          displayModal = {modalDisplay}
+          setDisplayModal = {setModalDisplay}
+          setLogIn ={setIsLoggedIn}
+        />
         <ExpenseTracker
           loggedIn={isLoggedIn}
           setLogIn ={setIsLoggedIn}
