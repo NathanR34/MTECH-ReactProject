@@ -1,4 +1,7 @@
 import {User} from './App'
+import History from './components/history'
+import NewTransaction from './components/NewTransaction'
+export const historyArr = []
 
 
 
@@ -18,21 +21,8 @@ export default function ExpenseTracker(loggedIn) {
                     <div>Income: {User.income} </div>
                     <div>Expense: 0</div>
                 </div>
-                <div className='spending-history'>
-                    <h2>History:</h2>
-                    <ul>
-                        <li>Flower</li>
-                        <li>Salary</li>
-                        <li>Book</li>
-                        <li>Camera</li>
-                    </ul>
-                </div>
-                <div className='new-transaction'>
-                    <label>Text</label>
-                    <input></input>
-                    <label>Amount</label>
-                    <input></input>
-                </div>
+                <History />
+                <NewTransaction />
             </div>
         )
     }
