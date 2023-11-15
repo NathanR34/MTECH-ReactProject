@@ -39,9 +39,7 @@ function App() {
               ></Route>
             </Routes>
           </Router>
-          <div className="logo">Budget App</div>{" "}
         </header>
-        <LogIn />
       </div>
     </div>
   );

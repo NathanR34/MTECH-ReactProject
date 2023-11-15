@@ -2,9 +2,6 @@ export default function ModalPopup() {
   console.log("clicked");
   return (
     <div className="background">
-      <header>
-        <div>Budget Tracker</div>
-      </header>
       <div className="modal">
         <div className="main-container modal-content">
           <div className="form-container">
@@ -12,7 +9,9 @@ export default function ModalPopup() {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title">Enter your info here</h1>
-                  <p className="close"> X </p>
+                  <a href="../App.js" className="close">
+                    x
+                  </a>
                 </div>
                 <label name="firstName">First Name</label>
                 <input
@@ -28,21 +27,10 @@ export default function ModalPopup() {
                   // onChange={addCurrentMoney}
                 />
                 <label>Income Frequency</label>
-                <select
-                  name="income-frequency"
-                  onClick={changeSelections}
-                  onChange={addIncomeFrequency}
-                >
-                  {isSelected === false ? (
-                    <option>Select Payment Frequency</option>
-                  ) : null}
-                  {isSelected && (
-                    <>
-                      <option value="bi-weekly">Bi-Weekly</option>
-                      <option value="semi-monthly">Semi-Monthly</option>
-                      <option value="weekly">Weekly</option>{" "}
-                    </>
-                  )}
+                <select name="income-frequency">
+                  <option value="bi-weekly">Bi-Weekly</option>
+                  <option value="semi-monthly">Semi-Monthly</option>
+                  <option value="weekly">Weekly</option>{" "}
                 </select>
                 <label>Income Per Paycheck</label>
                 <input
