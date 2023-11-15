@@ -3,11 +3,10 @@ import {User} from '../App'
 
 
 
-export default function ModalPopup() {
+export default function ModalPopup({loggedIn, setLogIn}) {
 
   const [isSelected, setIsSelected] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  
+  // const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const addUserName = (e) => {
     User.firstName = e.target.value
@@ -40,13 +39,11 @@ export default function ModalPopup() {
     if(User.income === null || User.income === ''){
       return alert('Please Include Your Current Income')
     }
+    
+    setLogIn(true)
     console.log(User)
-    setIsLoggedIn(true)
-
   }
 
-
-  console.log("clicked");
   return (
     <div className="background">
       <header>
@@ -95,7 +92,7 @@ export default function ModalPopup() {
                 <input
                   type="number"
                   placeholder="Paycheck Amount..."
-                  onClick={addIncome}
+                  onChange={addIncome}
                 />
 
                 <button className="submit-new-user" onClick={addUser} >
