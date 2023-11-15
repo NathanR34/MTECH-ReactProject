@@ -41,7 +41,6 @@ function App() {
             </ul>
           <div className="logo">Budget App</div>{" "}
         </header>
-        {/* <LogIn /> */}
         <ModalPopup 
           displayModal = {modalDisplay}
           setDisplayModal = {setModalDisplay}

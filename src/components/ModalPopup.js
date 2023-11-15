@@ -45,6 +45,11 @@ export default function ModalPopup({setLogIn, displayModal, setDisplayModal}) {
     console.log(User)
   }
 
+  const closeModal = () => {
+    setDisplayModal(false)
+  }
+
+
   if(displayModal){
     return (
       <div className="background">
@@ -58,7 +63,7 @@ export default function ModalPopup({setLogIn, displayModal, setDisplayModal}) {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h1 className="modal-title">Enter your info here</h1>
-                    <p className="close"> X </p>
+                    <p className="close" onClick={closeModal}> X </p>
                   </div>
                   <label name="firstName">First Name</label>
                   <input
