@@ -1,5 +1,5 @@
-import { useState } from "react"
-import {User} from '../App'
+import { useState } from "react";
+import { User } from "../App";
 
 
 
@@ -9,35 +9,35 @@ export default function ModalPopup({setLogIn, displayModal, setDisplayModal}) {
   // const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const addUserName = (e) => {
-    User.firstName = e.target.value
-  }
+    User.firstName = e.target.value;
+  };
 
   const addCurrentMoney = (e) => {
-    User.cash = e.target.value
-  }
+    User.cash = e.target.value;
+  };
 
   const addIncomeFrequency = (e) => {
-    User.incomeFrequency = e.target.value
-  }
+    User.incomeFrequency = e.target.value;
+  };
 
   const changeSelections = () => {
-    setIsSelected(true)
-  }
+    setIsSelected(true);
+  };
 
-  const addIncome = (e) =>{
-    User.income = e.target.value
-  }
+  const addIncome = (e) => {
+    User.income = e.target.value;
+  };
 
   const addUser = (e) => {
-    e.preventDefault()
-    if(User.firstName === null || User.firstName === ''){
-      return alert('Please Include Your First Name')
+    e.preventDefault();
+    if (User.firstName === null || User.firstName === "") {
+      return alert("Please Include Your First Name");
     }
-    if(User.cash === null || User.cash === ''){
-      return alert('Please Include Your Current Cash')
+    if (User.cash === null || User.cash === "") {
+      return alert("Please Include Your Current Cash");
     }
-    if(User.income === null || User.income === ''){
-      return alert('Please Include Your Current Income')
+    if (User.income === null || User.income === "") {
+      return alert("Please Include Your Current Income");
     }
     
     setDisplayModal(false)
