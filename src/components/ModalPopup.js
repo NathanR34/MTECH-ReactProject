@@ -50,9 +50,7 @@ export default function ModalPopup({ loggedIn, setLogIn }) {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title">Enter your info here</h1>
-                  <a href="../App.js" className="close">
-                    x
-                  </a>
+                  <p className="close"> x</p>
                 </div>
                 <label name="firstName">First Name</label>
                 <input

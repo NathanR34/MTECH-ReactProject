@@ -1,7 +1,5 @@
 import "./App.css";
-import LogIn from "./components/InitialForm";
-import ModalPopup from "./components/ModalPopup";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import ExpenseTracker from "./ExpenseTracker";
 import { useState } from "react";
 
@@ -23,7 +21,6 @@ function App() {
   return (
     <div className="App">
       <div className="mainContent">
-        {" "}
         <header>
           {" "}
           <Router>
