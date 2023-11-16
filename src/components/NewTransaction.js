@@ -3,11 +3,13 @@ import {User} from '../App'
 export default function NewTransaction({addTransaction}){
 
     let expenseIncomeHandler = null
-    
+    let checkboxValidation = false
 
-    const handler = () => {
+    const checkboxHandler = () => {
         const expense = document.querySelector('.expenseCB');
         const income = document.querySelector('.incomeCB');
+        
+
         if (expense.checked === true){
             expenseIncomeHandler = 'subtract' 
             income.checked = false
@@ -16,38 +18,32 @@ export default function NewTransaction({addTransaction}){
             expenseIncomeHandler = 'add'
             expense.checked = false
         }
-    }
-
-    const checkboxHandler = () => {
-        const expense = document.querySelector('.expenseCB');
-        const income = document.querySelector('.incomeCB');
-        if (expense.checked === true){
-            income.checked = false
-        }
-        if (income.checked === true){
-            expense.checked = false
+        if(income.checked === true || expense.checked === true ){
+            checkboxValidation = true 
         }
     }
 
      const handleExpense = (e) => {
-        e.target.nextSibling.nextSibling.checked = false
+        document.querySelector('.incomeCB').checked = false
     }
     const handleIncome = (e) => {
-        e.target.previousSibling.previousSibling.checked = false
+        document.querySelector('.expenseCB').checked = false
     }
 
-    const addNewTransaction = (e) => {
-        handler()
-
-        const title = e.target.previousSibling.previousSibling.previousSibling.previousSibling.value
-        const amount = e.target.previousSibling.previousSibling.value
+    const addNewTransaction = () => {
+        checkboxHandler()
+        if(checkboxValidation === false){
+            return alert('please choose between expense and income')
+        }
+        const title = document.querySelector('.transaction-label').value
+        const amount = document.querySelector('.transaction-amount').value
         if(title && amount){
             const newTran = {
                 title: title,
                 amount: amount
             }
-            e.target.previousSibling.previousSibling.previousSibling.previousSibling.value = ""
-            e.target.previousSibling.previousSibling.value = ""
+            document.querySelector('.transaction-label').value = ""
+            document.querySelector('.transaction-amount').value = ""
             addTransaction(newTran)
             if (expenseIncomeHandler === 'add'){
                 User.cash = Number(User.cash) + Number(newTran.amount) 
@@ -60,15 +56,14 @@ export default function NewTransaction({addTransaction}){
             alert('Please put a title and amount for your transaction')
         }
 
-        console.log(expenseIncomeHandler)
     }
 
     return (
         <div className='new-transaction'>
             <label>Text</label>
-            <input></input>
+            <input className='transaction-label'></input>
             <label>Amount</label>
-            <input type="number"></input>
+            <input className='transaction-amount' type="number"></input>
             
             <div>
                 <p>Select Expense or Income</p>
