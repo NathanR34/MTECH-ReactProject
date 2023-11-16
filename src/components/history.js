@@ -2,7 +2,7 @@
 
 
 export default function History({historyArr}){
-  
+    
     // if(historyArr !== []){
     //     return(
     //         <div>No history yet, please add some transactions to see it here.</div>
