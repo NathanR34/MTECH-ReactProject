@@ -1,13 +1,21 @@
 import {User} from './App'
+import { useState } from 'react'
 import History from './components/history'
 import NewTransaction from './components/NewTransaction'
-export const historyArr = []
+// export const historyArr = []
 
 
 
 
 export default function ExpenseTracker(loggedIn) {
 
+    
+
+    const [historyArr, setHistoryArr] = useState([])
+
+    const addTransaction = (newTran) => {
+        setHistoryArr([...historyArr, newTran]);
+      };
 
     if (loggedIn.loggedIn){
         return(
@@ -21,8 +29,12 @@ export default function ExpenseTracker(loggedIn) {
                     <div>Income: {User.income} </div>
                     <div>Expense: 0</div>
                 </div>
-                <History />
-                <NewTransaction />
+                <History
+                    historyArr = {historyArr}
+                />
+                <NewTransaction
+                    addTransaction={addTransaction}
+                />
             </div>
         )
     }
