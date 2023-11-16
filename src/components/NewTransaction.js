@@ -1,12 +1,19 @@
-import {historyArr} from "../ExpenseTracker"
+// import {historyArr} from "../ExpenseTracker"
 
 
-export default function NewTransaction(){
+export default function NewTransaction({addTransaction}){
 
     
 
-    const addTransaction = () => {
-        console.log(historyArr)
+    const addNewTransaction = (e) => {
+        const newTran = {
+            title: e.target.previousSibling.previousSibling.previousSibling.value,
+            amount: e.target.previousSibling.value
+        }
+        e.target.previousSibling.previousSibling.previousSibling.value = ""
+        e.target.previousSibling.value = ""
+        // historyArr.push(newTran)
+        addTransaction(newTran)
     }
 
     return (
@@ -14,8 +21,8 @@ export default function NewTransaction(){
             <label>Text</label>
             <input></input>
             <label>Amount</label>
-            <input></input>
-            <button onClick={addTransaction} ></button>
+            <input type="number"></input>
+            <button onClick={addNewTransaction} ></button>
         </div>
     )
 }
