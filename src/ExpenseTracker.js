@@ -6,22 +6,18 @@ import NewTransaction from './components/NewTransaction'
 
 
 
-export default function ExpenseTracker(loggedIn) {
+export default function ExpenseTracker({loggedIn, historyArr, addTransaction}) {
 
+    
 
-
-    const [historyArr, setHistoryArr] = useState([])
+    
 
     const addCommaToNumbers = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    const addTransaction = (newTran) => {
-        setHistoryArr([...historyArr, newTran]);
-      };
 
-
-    if (loggedIn.loggedIn){
+    if (loggedIn){
         return(
             <div className='expense-tracker-container'>
                 <div> Welcome {User.firstName} </div>

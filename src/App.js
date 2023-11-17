@@ -19,6 +19,12 @@ function App() {
   const [modalDisplay, setModalDisplay] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [pageSelect, setPageSelect] = useState('home')
+  const [historyArr, setHistoryArr] = useState([])
+
+  const addTransaction = (newTran) => {
+    setHistoryArr([...historyArr, newTran]);
+  };
+
 
   const showModal = (e) => {
     console.log(e.target)
@@ -51,6 +57,8 @@ function App() {
             key="expensetracker"
             loggedIn={isLoggedIn}
             setLogIn ={setIsLoggedIn}
+            historyArr={historyArr}
+            addTransaction={addTransaction}
             />
           ) : null}
         {(pageSelect === 'budget') ? (
