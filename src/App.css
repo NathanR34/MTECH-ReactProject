@@ -21,3 +21,12 @@ header {
 .mainNav > * :hover {
   background-color: grey;
 }
+.navBar {
+  display: flex;
+  justify-content: space-evenly;
+}
+.mainContent {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}

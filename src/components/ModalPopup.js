@@ -46,7 +46,7 @@ export default function ModalPopup({ setLogIn }) {
     }
 
     setOpen(false);
-    // setIsLoggedIn(true);
+    setIsLoggedIn(true);
     console.log(User);
   };
   const handleClose = () => {
@@ -58,7 +58,7 @@ export default function ModalPopup({ setLogIn }) {
       <div className="navBar">
         <NavBar />
       </div>
-      <div className="mainContent flex justify-center mt-14">
+      <div className="mainContent">
         <ExpenseTracker />
       </div>
       <React.Fragment>
@@ -125,7 +125,7 @@ export default function ModalPopup({ setLogIn }) {
             <Button onClick={handleClose} href="./">
               Cancel
             </Button>
-            <Button onClick={addUser} href="./">
+            <Button onClick={addUser} href="../App">
               Submit
             </Button>
           </DialogActions>

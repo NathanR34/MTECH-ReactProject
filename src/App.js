@@ -15,7 +15,7 @@ export default function App() {
       <div className="navBar">
         <Navbar />
       </div>
-      <div className="mainContent flex justify-center mt-6">
+      <div className="mainContent">
         <ExpenseTracker />
       </div>
     </>

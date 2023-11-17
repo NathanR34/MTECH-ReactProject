@@ -28,6 +28,9 @@ function Navbar(props) {
   const handleListItemClick = (value) => {
     onClose(value);
   };
+  const handlePopupOpen = () => {
+    console.log("Working");
+  };
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>Set account</DialogTitle>
@@ -46,12 +49,12 @@ function Navbar(props) {
         ))}
         <ListItem disableGutters>
           <ListItemButton autoFocus>
-            <Button href="./ModalPopup">
-              <ListItemAvatar>
-                <Avatar>
-                  <AddIcon />
-                </Avatar>
-              </ListItemAvatar>
+            <ListItemAvatar>
+              <Avatar>
+                <AddIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <Button onClick={handlePopupOpen} href="./ModalPopup">
               <ListItemText> Add Account</ListItemText>
             </Button>
           </ListItemButton>
@@ -82,7 +85,7 @@ export default function SimpleDialogDemo() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar className="NavBar" position="static">
+      <AppBar position="static">
         <Toolbar>
           {" "}
           <Typography variant="button" display="block" sx={{ flexGrow: 1 }}>
