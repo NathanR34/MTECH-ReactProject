@@ -4,6 +4,8 @@ import ModalPopup from "./components/ModalPopup";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ExpenseTracker from "./ExpenseTracker";
 import { useState } from "react";
+import BudgetPage from './components/BudgetSetting'
+
 
 export const User = {
   firstName: null,
@@ -13,14 +15,11 @@ export const User = {
   annual: 0,
 };
 
-// export const appData = {
-//   newUser: newUser,
-// };
-
 function App() {
   const [modalDisplay, setModalDisplay] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  
+  const [pageSelect, setPageSelect] = useState('home')
+
   const showModal = (e) => {
     console.log(e.target)
     setModalDisplay(true)
@@ -32,10 +31,13 @@ function App() {
       <div className="mainContent">
         <header>
             <ul className="mainNav">
-              <li>Home</li>
-              <li>Budget</li>
+              <li onClick={() => setPageSelect('home')}>Home</li>
+              <li onClick={() => setPageSelect('budget')} >Budget</li>
               <li>Overview</li>
-              <li className="pointer" onClick={showModal} > Login</li>
+              {(isLoggedIn) ? (
+               null
+              ) :  <li className="pointer" onClick={showModal} > Login</li>}
+              
             </ul>
           <div className="logo">Budget App</div>{" "}
         </header>
@@ -44,10 +46,19 @@ function App() {
           setDisplayModal = {setModalDisplay}
           setLogIn ={setIsLoggedIn}
         />
-        <ExpenseTracker
+        {(pageSelect === 'home') ? (
+            <ExpenseTracker
+            key="expensetracker"
+            loggedIn={isLoggedIn}
+            setLogIn ={setIsLoggedIn}
+            />
+          ) : null}
+        {(pageSelect === 'budget') ? (
+          <BudgetPage
+          key="budgetpage"
           loggedIn={isLoggedIn}
-          setLogIn ={setIsLoggedIn}
-        />
+          />
+        ) : null}
       </div>
     </div>
   );

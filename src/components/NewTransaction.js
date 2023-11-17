@@ -5,6 +5,7 @@ export default function NewTransaction({addTransaction}){
     let expenseIncomeHandler = null
     let checkboxValidation = false
 
+    
     const checkboxHandler = () => {
         const expense = document.querySelector('.expenseCB');
         const income = document.querySelector('.incomeCB');
