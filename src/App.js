@@ -1,8 +1,6 @@
-import "./App.css";
-import NavBar from "./components/NavBar";
+"use client";
+import Navbar from "./components/NavBar";
 import ExpenseTracker from "./ExpenseTracker";
-import { useState } from "react";
-
 export const User = {
   firstName: null,
   cash: null,
@@ -11,44 +9,15 @@ export const User = {
   annual: 0,
 };
 
-// export const appData = {
-//   newUser: newUser,
-// };
-
-function App() {
-  const [modalDisplay, setModalDisplay] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  
-  const showModal = (e) => {
-    console.log(e.target)
-    setModalDisplay(true)
-  }
-
-
+export default function App() {
   return (
-    <div className="App">
-      <div className="mainContent">
-        <header>
-            <ul className="mainNav">
-              <li>Home</li>
-              <li>Budget</li>
-              <li>Overview</li>
-              <li className="pointer" onClick={showModal} > Login</li>
-            </ul>
-          <div className="logo">Budget App</div>{" "}
-        </header>
-        <ModalPopup 
-          displayModal = {modalDisplay}
-          setDisplayModal = {setModalDisplay}
-          setLogIn ={setIsLoggedIn}
-        />
-        <ExpenseTracker
-          loggedIn={isLoggedIn}
-          setLogIn ={setIsLoggedIn}
-        />
+    <>
+      <div className="navBar">
+        <Navbar />
       </div>
-    </div>
+      <div className="mainContent flex justify-center mt-6">
+        <ExpenseTracker />
+      </div>
+    </>
   );
 }
-
-export default App;

@@ -1,13 +1,21 @@
-import { useState } from "react";
-import { User } from "../App";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import NavBar from "./NavBar";
 
-export default function ModalPopup({
-  setLogIn,
-  displayModal,
-  setDisplayModal,
-}) {
-  const [isSelected, setIsSelected] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+import { User } from "../App";
+import ExpenseTracker from "../ExpenseTracker";
+
+export default function ModalPopup({ setLogIn }) {
+  const [open, setOpen] = React.useState(true);
 
   const addUserName = (e) => {
     User.firstName = e.target.value;
@@ -19,10 +27,6 @@ export default function ModalPopup({
 
   const addIncomeFrequency = (e) => {
     User.incomeFrequency = e.target.value;
-  };
-
-  const changeSelections = () => {
-    setIsSelected(true);
   };
 
   const addIncome = (e) => {
@@ -41,80 +45,92 @@ export default function ModalPopup({
       return alert("Please Include Your Current Income");
     }
 
-    setDisplayModal(false);
-    setLogIn(true);
+    setOpen(false);
+    // setIsLoggedIn(true);
     console.log(User);
   };
-
-  const closeModal = () => {
-    setDisplayModal(false);
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  if (displayModal) {
-    return (
-      <div className="background">
-        <header>
-          <div>Budget Tracker</div>
-        </header>
-        <div className="modal">
-          <div className="main-container modal-content">
-            <div className="form-container">
-              <form className="int-user-form">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h1 className="modal-title">Enter your info here</h1>
-                    <p className="close" onClick={closeModal}>
-                      {" "}
-                      X{" "}
-                    </p>
-                  </div>
-                  <label name="firstName">First Name</label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    placeholder="First Name..."
-                    onChange={addUserName}
-                  />
-                  <label>Current Cash</label>
-                  <input
-                    type="number"
-                    placeholder="Your Current Money..."
-                    onChange={addCurrentMoney}
-                  />
-                  <label>Income Frequency</label>
-                  <select
-                    name="income-frequency"
-                    onClick={changeSelections}
-                    onChange={addIncomeFrequency}
-                  >
-                    {isSelected === false ? (
-                      <option>Select Payment Frequency</option>
-                    ) : null}
-                    {isSelected && (
-                      <>
-                        <option value="bi-weekly">Bi-Weekly</option>
-                        <option value="semi-monthly">Semi-Monthly</option>
-                        <option value="weekly">Weekly</option>{" "}
-                      </>
-                    )}
-                  </select>
-                  <label>Income Per Paycheck</label>
-                  <input
-                    type="number"
-                    placeholder="Paycheck Amount..."
-                    onChange={addIncome}
-                  />
-
-                  <button className="submit-new-user" onClick={addUser}>
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+  return (
+    <>
+      <div className="navBar">
+        <NavBar />
       </div>
-    );
-    return <></>;
-  }
+      <div className="mainContent flex justify-center mt-14">
+        <ExpenseTracker />
+      </div>
+      <React.Fragment>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Login</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Enter your info here</DialogContentText>
+            <TextField
+              required
+              autoFocus
+              margin="dense"
+              id="name"
+              label="name"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={addUserName}
+            />{" "}
+            <TextField
+              required
+              margin="dense"
+              id="standard-number"
+              label="Current Cash"
+              type="number"
+              variant="standard"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={addCurrentMoney}
+            />
+            <InputLabel id="demo-simple-select-label">
+              Income Frequency
+            </InputLabel>
+            <Select
+              required
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={"income-frequency"}
+              label="income-frequency"
+              onChange={addIncomeFrequency}
+            >
+              <MenuItem value={"income-frequency"}>
+                Select Payment Frequency
+              </MenuItem>
+              <MenuItem value={"bi-weekly"}>Bi-Weekly</MenuItem>
+              <MenuItem value={"semi-monthly"}>Semi-Monthly</MenuItem>
+              <MenuItem value={"weekly"}>Weekly</MenuItem>
+            </Select>
+            <br />
+            <TextField
+              required
+              margin="dense"
+              id="standard-number"
+              label="Income Per Paycheck"
+              type="number"
+              variant="standard"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={addIncome}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} href="./">
+              Cancel
+            </Button>
+            <Button onClick={addUser} href="./">
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </React.Fragment>
+    </>
+  );
 }
