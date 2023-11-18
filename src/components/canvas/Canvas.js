@@ -1,5 +1,6 @@
 
 import { useState, useRef, useEffect, createContext, useContext } from 'react';
+import { timestamp } from '../../util/util';
 
 const CanvasContext = createContext({});
 
@@ -55,7 +56,8 @@ export default function Canvas({children, size=defaultCanvasSize, style={}}){
                 <CanvasContext.Provider value={{
                     ctx: ctx,
                     updating: true,
-                    state: state
+                    state: state,
+                    ts: timestamp()
                 }}>
                     <InternalRun callback={function postDraw(canvasState){
                         canvasState.updating = true;

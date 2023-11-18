@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "./components/NavBar";
 import ExpenseTracker from "./ExpenseTracker";
 import { useState } from "react";
 import BudgetPage from './components/BudgetSetting'
