@@ -14,7 +14,7 @@ import NavBar from "./NavBar";
 import { User } from "../App";
 import ExpenseTracker from "../ExpenseTracker";
 
-export default function ModalPopup({ setLogIn }) {
+export default function ModalPopup({ setIsLoggedIn }) {
   const [open, setOpen] = React.useState(true);
 
   const addUserName = (e) => {
@@ -55,12 +55,6 @@ export default function ModalPopup({ setLogIn }) {
   console.log("modal");
   return (
     <>
-      <div className="navBar">
-        <NavBar />
-      </div>
-      <div className="mainContent">
-        <ExpenseTracker />
-      </div>
       <React.Fragment>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Login</DialogTitle>
