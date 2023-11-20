@@ -1,14 +1,11 @@
 "use client";
 import Navbar from "./components/NavBar";
 import ExpenseTracker from "./ExpenseTracker";
-<<<<<<< Updated upstream
-=======
 import { useState } from "react";
 import BudgetPage from "./components/BudgetSetting";
 import ModalPopup from "./components/ModalPopup";
 import NavBar from "./components/NavBar";
 
->>>>>>> Stashed changes
 export const User = {
   firstName: null,
   cash: null,
@@ -18,12 +15,6 @@ export const User = {
 };
 
 export default function App() {
-<<<<<<< Updated upstream
-  return (
-    <>
-      <div className="navBar">
-        <Navbar />
-=======
   const [modalDisplay, setModalDisplay] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pageSelect, setPageSelect] = useState("home");
@@ -58,44 +49,6 @@ export default function App() {
         ) : null}
         {pageSelect === "budget" ? (
           <BudgetPage key="budgetpage" loggedIn={isLoggedIn} />
-        ) : null}
->>>>>>> Stashed changes
-      </div>
-      <div className="mainContent">
-      <NavBar
-        setPageSelect = {setPageSelect}
-      />
-        <header>
-            {/* <ul className="mainNav">
-              <li onClick={() => setPageSelect('home')}>Home</li>
-              <li onClick={() => setPageSelect('budget')} >Budget</li>
-              <li>Overview</li>
-              {(isLoggedIn) ? (
-               null
-              ) :  <li className="pointer" onClick={showModal} > Login</li>}
-              
-            </ul> */}
-          <div className="logo">Budget App</div>{" "}
-        </header>
-        <ModalPopup 
-          displayModal = {modalDisplay}
-          setDisplayModal = {setModalDisplay}
-          setIsLoggedIn ={setIsLoggedIn}
-        />
-        {(pageSelect === 'home') ? (
-            <ExpenseTracker
-            key="expensetracker"
-            loggedIn={isLoggedIn}
-            setLogIn ={setIsLoggedIn}
-            historyArr={historyArr}
-            addTransaction={addTransaction}
-            />
-          ) : null}
-        {(pageSelect === 'budget') ? (
-          <BudgetPage
-          key="budgetpage"
-          loggedIn={isLoggedIn}
-          />
         ) : null}
       </div>
     </div>

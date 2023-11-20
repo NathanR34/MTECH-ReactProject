@@ -70,11 +70,7 @@ Navbar.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-<<<<<<< Updated upstream
-export default function SimpleDialogDemo() {
-=======
 export default function SimpleDialogDemo({ setPageSelect }) {
->>>>>>> Stashed changes
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
@@ -92,12 +88,6 @@ export default function SimpleDialogDemo({ setPageSelect }) {
       <AppBar position="static">
         <Toolbar>
           {" "}
-<<<<<<< Updated upstream
-          <Typography variant="button" display="block" sx={{ flexGrow: 1 }}>
-            Home
-          </Typography>{" "}
-          <Typography variant="button" display="block" sx={{ flexGrow: 1 }}>
-=======
           <Typography
             className="logo"
             variant="button"
@@ -121,7 +111,6 @@ export default function SimpleDialogDemo({ setPageSelect }) {
             sx={{ flexGrow: 1 }}
             onClick={() => setPageSelect("budget")}
           >
->>>>>>> Stashed changes
             Budget
           </Typography>{" "}
           <Typography variant="button" display="block" sx={{ flexGrow: 1 }}>

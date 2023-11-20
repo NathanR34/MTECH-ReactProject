@@ -12,37 +12,6 @@ export default function ExpenseTracker({
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-<<<<<<< Updated upstream
-export default function ExpenseTracker() {
-  const [historyArr, setHistoryArr] = useState([]);
-
-  const addTransaction = (newTran) => {
-    setHistoryArr([...historyArr, newTran]);
-  };
-
-  return (
-    <Paper className="w-1/4 h-1/2 flex-col justify-center" elevation={3}>
-      <div className="row w-full">
-        <h1> Welcome {User.firstName} </h1>
-        <div className="balance">
-          <h3>YOUR BALANCE</h3>
-          <h2>&#36;{User.cash}.00</h2>
-        </div>
-      </div>
-      <div className="row w-full">
-        <div className="income-expense-container">
-          <div>Income: {User.income} </div>
-          <div>Expense: 0</div>
-        </div>
-      </div>
-      <div className="row w-full">
-        <History historyArr={historyArr} />
-        <NewTransaction addTransaction={addTransaction} />
-      </div>
-    </Paper>
-  );
-}
-=======
   if (loggedIn) {
     return (
       <Paper className=" expensePaper" elevation={3}>
@@ -102,4 +71,3 @@ export default function ExpenseTracker() {
 //         <h1>Please Log In</h1>
 //     )
 // }
->>>>>>> Stashed changes
