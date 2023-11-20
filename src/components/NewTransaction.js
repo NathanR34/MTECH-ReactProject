@@ -61,14 +61,14 @@ export default function NewTransaction({ addTransaction }) {
   return (
     <div className="new-transaction">
       <TextField
-        className="transaction-label w-28 mx-2"
+        className="transaction-label transactionItem"
         inputRef={title}
         id="standard-basic"
         label="Text"
         variant="standard"
       />
       <TextField
-        className="transaction-amount w-28 mx-2"
+        className="transaction-amount transactionItem"
         inputRef={amount}
         id="standard-number"
         label="Amount"

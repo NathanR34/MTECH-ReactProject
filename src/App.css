@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+body {
+  width: 100%;
+}
 header {
   background-color: rgb(85, 136, 255);
   text-align: center;
@@ -29,4 +32,14 @@ header {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+}
+.expensePaper {
+  width: 25%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.w-full {
+  width: 100%;
 }

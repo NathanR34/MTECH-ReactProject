@@ -52,7 +52,7 @@ export default function ModalPopup({ setLogIn }) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log("modal");
   return (
     <>
       <div className="navBar">
