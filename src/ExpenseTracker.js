@@ -14,26 +14,31 @@ export default function ExpenseTracker({
 
   if (loggedIn) {
     return (
-      <Paper className=" expensePaper" elevation={3}>
-        <div className="row w-full">
-          <h1> Welcome {User.firstName} </h1>
-          <div className="balance">
-            <h3>YOUR BALANCE</h3>
-            <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
+      <div className="mainPage">
+        <Paper className=" expensePaper" elevation={5}>
+          <div className="row w-full">
+            <h1> Welcome {User.firstName} </h1>
+            <div className="balance">
+              <h3>YOUR BALANCE</h3>
+              <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
+            </div>
           </div>
-        </div>
-        <div className="row w-full income-expense-container">
-          <div>Income: {addCommaToNumbers(User.income)} </div>
-          <div>Expense: 0</div>
-        </div>
-        <div className="row w-full">
+          <div className="row w-full income-expense-container">
+            <div>Income: {addCommaToNumbers(User.income)} </div>
+            <div>Expense: 0</div>
+          </div>
+          <div className="row w-full">
+            <NewTransaction
+              key="newtransaction"
+              addTransaction={addTransaction}
+            />
+          </div>
+        </Paper>
+        <Paper sx={{ borderRadius: 5 }} className="historyPaper" elevation={5}>
+          {" "}
           <History key="history" historyArr={historyArr} />
-          <NewTransaction
-            key="newtransaction"
-            addTransaction={addTransaction}
-          />
-        </div>
-      </Paper>
+        </Paper>
+      </div>
     );
   }
   return <h1>Please Log In</h1>;

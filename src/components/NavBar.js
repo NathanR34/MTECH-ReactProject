@@ -98,6 +98,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
             Budget App
           </Typography>{" "}
           <Typography
+            className="button"
             variant="button"
             display="block"
             sx={{ flexGrow: 1 }}
@@ -106,6 +107,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
             Home
           </Typography>{" "}
           <Typography
+            className="button"
             variant="button"
             display="block"
             sx={{ flexGrow: 1 }}
@@ -113,7 +115,12 @@ export default function SimpleDialogDemo({ setPageSelect }) {
           >
             Budget
           </Typography>{" "}
-          <Typography variant="button" display="block" sx={{ flexGrow: 1 }}>
+          <Typography
+            className="button"
+            variant="button"
+            display="block"
+            sx={{ flexGrow: 1 }}
+          >
             Overview
           </Typography>{" "}
           <Button
