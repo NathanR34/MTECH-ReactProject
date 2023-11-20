@@ -288,7 +288,6 @@ class CanvasTopFrame extends CanvasAreaFrame {
     }
 }
 
-let logged = new Set();
 
 export function AreaFrame({children, size, area, name}){
     const save = useRef({});
@@ -296,11 +295,6 @@ export function AreaFrame({children, size, area, name}){
     useCanvas(function(ctx, state){
         save.current.state = {frame: state.frame};
         frame.current.init(size, area, state.frame, state.frames, name);
-        
-        if(!logged.has(frame.current)){
-            console.log(frame.current, state.frame);
-            logged.add(frame.current);
-        }
 
         ctx.scale(1/frame.current.scale[0], 1/frame.current.scale[1]);
         ctx.translate(-frame.current.delta[0], -frame.current.delta[1]);
