@@ -1,9 +1,38 @@
 import {User} from '../App'
+import {getDate} from '../App'
+import { useState } from 'react'
 
 const BudgetPage = (loggedIn) => {
 
+    const [upcomingPaycheck, setUpcomingPaycheck] = useState(false)
+
     const paycheckSelection = (e) => {
-        console.log(e.target.value)
+        let paycheckDate = e.target.value;
+        let numWeeks = 2
+        paycheckDate = new Date(paycheckDate)
+
+        paycheckDate.setDate(paycheckDate.getDate() + numWeeks * 7)
+        let nextPaycheckDay = paycheckDate.getDate() + 1
+        let nextPaycheckMonth = paycheckDate.getMonth() + 1;
+        let nextPaycheckYear = paycheckDate.getYear()
+
+
+
+        if(User.incomeFrequency === 'bi-weekly'){
+            // e.target.value
+            const today = new Date();
+            const month = today.getMonth();
+            const year = today.getFullYear();
+            const date = today.getDate();
+
+            console.log(month)
+
+
+            if(month + 1 === nextPaycheckMonth && date + 1 === nextPaycheckDay){
+                setUpcomingPaycheck(true)
+            }
+
+        }
     }
 
     
@@ -17,7 +46,14 @@ const BudgetPage = (loggedIn) => {
                     <input onSelect={paycheckSelection} type="date" /> </div>
             ) : null}
            
-
+           {(upcomingPaycheck === true) ? (
+                                (
+                                    <div>
+                                        Upcoming Paycheck {User.income}
+                                    </div>
+                                )
+           ) : null}
+            
         </div>
     )}
     
