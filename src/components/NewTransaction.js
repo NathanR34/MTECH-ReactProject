@@ -5,7 +5,7 @@ import { purple } from "@mui/material/colors";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRef, useState } from "react";
-import {getDate} from '../App'
+import {getDate} from '../util/time'
 
 
 export default function NewTransaction({ addTransaction }) {

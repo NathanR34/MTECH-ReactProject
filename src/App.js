@@ -15,38 +15,6 @@ export const User = {
 };
 
 
-export const getDate = () => {
-  const today = new Date();
-  const month = today.getMonth();
-  const year = today.getFullYear();
-  const date = today.getDate();
-  const hour = today.getHours();
-  const minute = today.getMinutes();
-  const second = today.getSeconds();
-  const time = hour + ':' + minute + ':' + second
-  const currentDate = month + '/' + date + '/' + year;
-  return currentDate + ' ' + time
-}
-
-export const DateTime = () => {
-  const today = new Date();
-  const month = today.getMonth() + 1; 
-  const year = today.getFullYear();
-  const date = today.getDate();
-  const fullDate = month + '/' + date + '/' + year;
-  const [currentDate, setCurrentDate] = useState(fullDate);
-  useEffect (() => {
-    var timer = setInterval(() =>setCurrentDate(fullDate), 10000)
-    return function cleanup(){
-      clearInterval(timer)
-    }
-  });
-  return(
-    <div>
-      Date: {currentDate}
-    </div>
-  )
-} 
 
 
 export default function App() {
@@ -86,7 +54,7 @@ export default function App() {
         {pageSelect === "budget" ? (
           <BudgetPage key="budgetpage" loggedIn={isLoggedIn} />
         ) : null}
-        <DateTime />
+        {/* <DateTime /> */}
       </div>
     </div>
   );
