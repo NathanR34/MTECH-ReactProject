@@ -9,14 +9,24 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import NavBar from "./NavBar";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 import { User } from "../App";
-import ExpenseTracker from "../ExpenseTracker";
 
 export default function ModalPopup({ setIsLoggedIn }) {
   const [open, setOpen] = React.useState(true);
+  const [missingOpen, setMissingOpen] = React.useState(false);
+  const handleMissing = () => {
+    setMissingOpen(true);
+  };
+  const handleMissingClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setMissingOpen(false);
+  };
   const addUserName = (e) => {
     User.firstName = e.target.value;
   };
@@ -36,13 +46,13 @@ export default function ModalPopup({ setIsLoggedIn }) {
   const addUser = (e) => {
     e.preventDefault();
     if (User.firstName === null || User.firstName === "") {
-      return alert("Please Include Your First Name");
+      handleMissing();
     }
     if (User.cash === null || User.cash === "") {
-      return alert("Please Include Your Current Cash");
+      handleMissing();
     }
     if (User.income === null || User.income === "") {
-      return alert("Please Include Your Current Income");
+      handleMissing();
     }
 
     setOpen(false);
@@ -125,6 +135,19 @@ export default function ModalPopup({ setIsLoggedIn }) {
           </DialogActions>
         </Dialog>
       </React.Fragment>
+      <Snackbar
+        open={missingOpen}
+        autoHideDuration={6000}
+        onClose={handleMissingClose}
+      >
+        <Alert
+          onClose={handleMissingClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Please check if the form is filled out!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

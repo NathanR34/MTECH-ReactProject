@@ -16,6 +16,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
+import { User } from "../App";
 const emails = ["Name One", "Name Two", "Name Three"];
 
 function Navbar(props) {

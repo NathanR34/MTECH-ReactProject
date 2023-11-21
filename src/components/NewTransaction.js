@@ -13,6 +13,10 @@ export default function NewTransaction({ addTransaction }) {
   const [open, setOpen] = useState(false);
   const title = useRef(null);
   const amount = useRef(null);
+  const addIncomeAmount = () => {
+    console.log(User.income);
+  };
+
   const checkboxHandler = () => {
     const expense = document.querySelector(".expenseCB");
     const income = document.querySelector(".incomeCB");
@@ -47,6 +51,7 @@ export default function NewTransaction({ addTransaction }) {
     setOpen(false);
   };
   const addNewTransaction = () => {
+    addIncomeAmount();
     checkboxHandler();
     if (checkboxValidation === false) {
       return handleClick();
@@ -62,6 +67,7 @@ export default function NewTransaction({ addTransaction }) {
       addTransaction(newTran);
       if (expenseIncomeHandler === "add") {
         User.cash = Number(User.cash) + Number(newTran.amount);
+        // User.income = Number(User.cash) + User.income;
       } else if (expenseIncomeHandler === "subtract") {
         User.cash = User.cash - newTran.amount;
       }
