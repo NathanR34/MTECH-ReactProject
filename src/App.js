@@ -43,7 +43,7 @@ export const DateTime = () => {
   });
   return(
     <div>
-      Time: {currentDate}
+      Date: {currentDate}
     </div>
   )
 } 
@@ -60,51 +60,31 @@ export default function App() {
     setHistoryArr([...historyArr, newTran]);
   };
 
-
   const showModal = (e) => {
-    console.log(e.target)
-    setModalDisplay(true)
-  }
-
+    console.log(e.target);
+    setModalDisplay(true);
+  };
 
   return (
-    
     <div className="App">
+      <NavBar setPageSelect={setPageSelect} />
       <div className="mainContent">
-      <NavBar
-        setPageSelect = {setPageSelect}
-      />
-        <header>
-            {/* <ul className="mainNav">
-              <li onClick={() => setPageSelect('home')}>Home</li>
-              <li onClick={() => setPageSelect('budget')} >Budget</li>
-              <li>Overview</li>
-              {(isLoggedIn) ? (
-               null
-              ) :  <li className="pointer" onClick={showModal} > Login</li>}
-              
-            </ul> */}
-          <div className="logo">Budget App</div>{" "}
-        </header>
-        <ModalPopup 
-          displayModal = {modalDisplay}
-          setDisplayModal = {setModalDisplay}
-          setIsLoggedIn ={setIsLoggedIn}
+        <ModalPopup
+          displayModal={modalDisplay}
+          setDisplayModal={setModalDisplay}
+          setIsLoggedIn={setIsLoggedIn}
         />
-        {(pageSelect === 'home') ? (
-            <ExpenseTracker
+        {pageSelect === "home" ? (
+          <ExpenseTracker
             key="expensetracker"
             loggedIn={isLoggedIn}
-            setLogIn ={setIsLoggedIn}
+            setLogIn={setIsLoggedIn}
             historyArr={historyArr}
             addTransaction={addTransaction}
-            />
-          ) : null}
-        {(pageSelect === 'budget') ? (
-          <BudgetPage
-          key="budgetpage"
-          loggedIn={isLoggedIn}
           />
+        ) : null}
+        {pageSelect === "budget" ? (
+          <BudgetPage key="budgetpage" loggedIn={isLoggedIn} />
         ) : null}
         <DateTime />
       </div>

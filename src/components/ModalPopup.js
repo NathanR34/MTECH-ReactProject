@@ -52,7 +52,7 @@ export default function ModalPopup({ setIsLoggedIn }) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log("modal");
   return (
     <>
       <React.Fragment>

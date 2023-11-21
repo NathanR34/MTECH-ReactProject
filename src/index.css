@@ -1,24 +1,88 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffffd7;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   margin: 0px;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
 #root {
   display: grid;
   grid: 1fr / 1fr;
+}
+.mainContent {
+  display: flex;
+  justify-content: center;
+}
+.mainPage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.expensePaper {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.historyPaper {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 35px;
+  margin-top: 50px;
+}
+.w-full {
+  width: 100%;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.row-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.income-expense-container {
+  display: flex;
+  flex-direction: row;
+}
+.income-expense-container > p {
+  width: 45%;
+  margin: 5px;
+}
+.transactionItem {
+  width: 7rem;
+  margin: 0 10px;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+w-50 {
+  width: 50%;
+}
+.button {
+  cursor: pointer;
 }

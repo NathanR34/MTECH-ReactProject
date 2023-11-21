@@ -70,7 +70,7 @@ Navbar.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo( {setPageSelect} ) {
+export default function SimpleDialogDemo({ setPageSelect }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
@@ -88,13 +88,39 @@ export default function SimpleDialogDemo( {setPageSelect} ) {
       <AppBar position="static">
         <Toolbar>
           {" "}
-          <Typography variant="button" display="block" sx={{ flexGrow: 1 }} onClick={() => setPageSelect('home')}>
+          <Typography
+            className="logo"
+            variant="button"
+            display="block"
+            sx={{ flexGrow: 1 }}
+            onClick={() => setPageSelect("home")}
+          >
+            Budget App
+          </Typography>{" "}
+          <Typography
+            className="button"
+            variant="button"
+            display="block"
+            sx={{ flexGrow: 1 }}
+            onClick={() => setPageSelect("home")}
+          >
             Home
           </Typography>{" "}
-          <Typography variant="button" display="block" sx={{ flexGrow: 1 }} onClick={() => setPageSelect('budget')} >
+          <Typography
+            className="button"
+            variant="button"
+            display="block"
+            sx={{ flexGrow: 1 }}
+            onClick={() => setPageSelect("budget")}
+          >
             Budget
           </Typography>{" "}
-          <Typography variant="button" display="block" sx={{ flexGrow: 1 }}>
+          <Typography
+            className="button"
+            variant="button"
+            display="block"
+            sx={{ flexGrow: 1 }}
+          >
             Overview
           </Typography>{" "}
           <Button

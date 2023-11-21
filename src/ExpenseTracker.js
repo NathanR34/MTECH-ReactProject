@@ -1,61 +1,53 @@
-import { useState } from "react";
 import { User } from "./App";
 import History from "./components/history";
 import NewTransaction from "./components/NewTransaction";
 import Paper from "@mui/material/Paper";
 
-// import NewTransaction from "./components/NewTransaction";
+export default function ExpenseTracker({
+  loggedIn,
+  historyArr,
+  addTransaction,
+}) {
+  const addCommaToNumbers = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
-export default function ExpenseTracker({loggedIn, historyArr, addTransaction}) {
-
-
-    const addCommaToNumbers = (x) => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-
-    if (loggedIn){
+  if (loggedIn) {
     return (
-        <Paper className="w-1/4 h-1/2 flex-col justify-center" elevation={3}>
-        <div className="row w-full">
+      <div className="mainPage">
+        <Paper className=" expensePaper" elevation={5}>
+          <div className="row w-full">
             <h1> Welcome {User.firstName} </h1>
             <div className="balance">
-                <h3>YOUR BALANCE</h3>
-                <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
+              <h3>YOUR BALANCE</h3>
+              <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
             </div>
-        </div>
-        <div className="row w-full">
-            <div className="income-expense-container">
-                        <div>Income: {addCommaToNumbers(User.income)} </div>
-                        <div>Expense: 0</div>
-            </div>
-        </div>
-        <div className="row w-full">
-                    <History
-                        key="history"
-                        historyArr = {historyArr}
-                    />
-                    <NewTransaction
-                    key = "newtransaction"
-                        addTransaction={addTransaction}
-                    />
-                </div>
+          </div>
+          <div className="row w-full income-expense-container">
+            <div>Income: {addCommaToNumbers(User.income)} </div>
+            <div>Expense: 0</div>
+          </div>
+          <div className="row w-full">
+            <NewTransaction
+              key="newtransaction"
+              addTransaction={addTransaction}
+            />
+          </div>
         </Paper>
-        )}
-        return (
-            <h1>Please Log In</h1>
-        )
-    }
+        <Paper sx={{ borderRadius: 5 }} className="historyPaper" elevation={5}>
+          {" "}
+          <History key="history" historyArr={historyArr} />
+        </Paper>
+      </div>
+    );
+  }
+  return <h1>Please Log In</h1>;
+}
 // export default function ExpenseTracker({loggedIn, historyArr, addTransaction}) {
-
-    
-
-    
 
 //     const addCommaToNumbers = (x) => {
 //         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 //     }
-
 
 //     if (loggedIn){
 //         return(
@@ -65,7 +57,7 @@ export default function ExpenseTracker({loggedIn, historyArr, addTransaction}) {
 //                     <h3>YOUR BALANCE</h3>
 //                     <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
 //                 </div>
-//                 <div className='income-expense-container'> 
+//                 <div className='income-expense-container'>
 //                     <div>Income: {addCommaToNumbers(User.income)} </div>
 //                     <div>Expense: 0</div>
 //                 </div>
