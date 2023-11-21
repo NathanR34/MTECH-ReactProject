@@ -1,11 +1,12 @@
 import { User } from "../App";
-
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { purple } from "@mui/material/colors";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRef, useState } from "react";
+import {getDate} from '../App'
+
 
 export default function NewTransaction({ addTransaction }) {
   let expenseIncomeHandler = null;
@@ -61,6 +62,7 @@ export default function NewTransaction({ addTransaction }) {
       const newTran = {
         title: title.current.value,
         amount: amount.current.value,
+        date: getDate()
       };
       title.current.value = "";
       amount.current.value = "";
