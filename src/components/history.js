@@ -1,11 +1,10 @@
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import {getDate} from '../App'
-
+import { getDate } from "../App";
+import Typography from "@mui/material/Typography";
 
 export default function History({ historyArr }) {
-
-  console.log(getDate())
+  console.log(getDate());
 
   const historyOverview = historyArr.slice(-4);
   const addCommaToNumbers = (x) => {
@@ -18,8 +17,8 @@ export default function History({ historyArr }) {
       <ListItem className="flex-col" component="div">
         {historyOverview.map((tran, index) => (
           <ListItemText key={index}>
-            {" "}
-            {tran.title}: {addCommaToNumbers(tran.amount)}  {tran.date}
+            {tran.title}: {addCommaToNumbers(tran.amount)}
+            <Typography color="text.secondary">{tran.date}</Typography>
           </ListItemText>
         ))}
       </ListItem>
