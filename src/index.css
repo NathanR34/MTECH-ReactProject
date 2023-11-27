@@ -34,8 +34,10 @@ body,
   justify-content: space-around;
 }
 .expensePaper {
+  margin-bottom: 35px;
   width: 50%;
   height: max-content;
+  min-width: fit-content;
   padding-bottom: 10px;
   position: relative;
   display: flex;
@@ -44,10 +46,12 @@ body,
 }
 .historyPaper {
   width: 20%;
+  min-width: fit-content;
   position: relative;
   left: 10px;
 }
 .spending-history {
+  min-width: fit-content;
   display: flex;
   flex-direction: column;
   align-content: start;

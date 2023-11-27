@@ -67,7 +67,7 @@ export const DateTime = () => {
 export default function App() {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [pageSelect, setPageSelect] = useState("home");
+  const [pageSelect, setPageSelect] = useState("Home");
   const [historyArr, setHistoryArr] = useState([]);
 
   const addTransaction = (newTran) => {
@@ -88,7 +88,7 @@ export default function App() {
           setDisplayModal={setModalDisplay}
           setIsLoggedIn={setIsLoggedIn}
         />
-        {pageSelect === "home" ? (
+        {pageSelect === "Home" ? (
           <ExpenseTracker
             key="expensetracker"
             loggedIn={isLoggedIn}
@@ -97,7 +97,7 @@ export default function App() {
             addTransaction={addTransaction}
           />
         ) : null}
-        {pageSelect === "budget" ? (
+        {pageSelect === "Budget" ? (
           <BudgetPage key="budgetpage" loggedIn={isLoggedIn} />
         ) : null}
         {/* <DateTime /> */}
