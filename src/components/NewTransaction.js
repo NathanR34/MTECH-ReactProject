@@ -68,7 +68,6 @@ export default function NewTransaction({ addTransaction }) {
       addTransaction(newTran);
       if (expenseIncomeHandler === "add") {
         User.cash = Number(User.cash) + Number(newTran.amount);
-        // User.income = Number(User.cash) + User.income;
       } else if (expenseIncomeHandler === "subtract") {
         User.cash = User.cash - newTran.amount;
       }

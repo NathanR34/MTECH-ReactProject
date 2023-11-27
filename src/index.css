@@ -25,32 +25,45 @@ body,
 }
 
 .mainPage {
+  position: absolute;
   width: 100%;
   height: 1vh;
+  top: 100px;
   display: flex;
-  justify-content: center;
+  flex-flow: row-reverse wrap;
+  justify-content: space-around;
 }
 .expensePaper {
-  width: 33%;
+  width: 50%;
   height: max-content;
   padding-bottom: 10px;
-  position: absolute;
-  top: 15%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
 }
 .historyPaper {
-  width: 15%;
-  height: 40%;
+  width: 20%;
+  position: relative;
+  left: 10px;
+}
+.spending-history {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  position: absolute;
-  left: 10px;
-  top: 20%;
+  align-content: start;
+  height: 100%;
   overflow: hidden;
+  padding: 10px;
+}
+.budget-container {
+  width: 45%;
+  height: min-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 20px;
 }
 .row {
   display: flex;

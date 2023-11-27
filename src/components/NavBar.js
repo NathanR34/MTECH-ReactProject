@@ -89,37 +89,47 @@ export default function SimpleDialogDemo({ setPageSelect }) {
       <AppBar position="static">
         <Toolbar>
           {" "}
-          <Typography
-            className="logo"
+          <Typography display="block" sx={{ flexGrow: 1 }}>
+            Budget App
+          </Typography>{" "}
+          {/* <Typography
+            className="button"
             variant="button"
             display="block"
             sx={{ flexGrow: 1 }}
           >
-            Budget App
-          </Typography>{" "}
-          <Typography
-            className="button"
-            variant="button"
-            display="block"
+            Home
+          </Typography>{" "} */}
+          <Button
+            color="inherit"
             sx={{ flexGrow: 1 }}
             onClick={() => setPageSelect("home")}
           >
+            {" "}
             Home
-          </Typography>{" "}
-          <Typography
+          </Button>
+          {/* <Typography
             className="button"
             variant="button"
             sx={{ flexGrow: 1 }}
-            onClick={() => setPageSelect("budget")}
           >
             Budget
-          </Typography>
-          <Typography display="block" sx={{ flexGrow: 1 }}>
-            Overview
-          </Typography>
+          </Typography> */}
           <Button
             color="inherit"
-            sx={{ color: purple[50] }}
+            sx={{ flexGrow: 1 }}
+            onClick={() => setPageSelect("budget")}
+          >
+            {" "}
+            Budget
+          </Button>
+          <Button disabled color="inherit" sx={{ flexGrow: 1 }}>
+            {" "}
+            Overview
+          </Button>
+          <Button
+            color="inherit"
+            sx={{ flexGrow: 1 }}
             onClick={handleClickOpen}
           >
             Login

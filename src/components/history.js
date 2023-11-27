@@ -12,7 +12,7 @@ export default function History({ historyArr }) {
   };
   console.log();
   return (
-    <div className="spending-history w-50 flex-col">
+    <div className="spending-history">
       <h2>History:</h2>
       <ListItem className="flex-col" component="div">
         {historyOverview.map((tran, index) => (
