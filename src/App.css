@@ -31,11 +31,11 @@ header {
 .mainContent {
   display: flex;
   justify-content: center;
+  height: 100px;
   margin-top: 10px;
 }
 .expensePaper {
   width: 25%;
-  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

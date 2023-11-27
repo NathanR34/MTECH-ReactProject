@@ -5,8 +5,7 @@ import { purple } from "@mui/material/colors";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRef, useState } from "react";
-import {getDate} from '../App'
-
+import { getDate } from "../App";
 
 export default function NewTransaction({ addTransaction }) {
   let expenseIncomeHandler = null;
@@ -62,7 +61,7 @@ export default function NewTransaction({ addTransaction }) {
       const newTran = {
         title: title.current.value,
         amount: amount.current.value,
-        date: getDate()
+        date: getDate(),
       };
       title.current.value = "";
       amount.current.value = "";
@@ -81,43 +80,56 @@ export default function NewTransaction({ addTransaction }) {
   return (
     <>
       <div className="new-transaction">
-        <TextField
-          className="transaction-label transactionItem"
-          inputRef={title}
-          id="standard-basic"
-          label="Text"
-          variant="standard"
-        />
-        <TextField
-          className="transaction-amount transactionItem"
-          inputRef={amount}
-          id="standard-number"
-          label="Amount"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="standard"
-        />
-        <p>Select:</p>
-        <div className="flex justify-around">
-          <label for="expenseCD"> Expense:</label>
-          <input
-            type="checkbox"
-            defaultChecked={true}
-            className="expenseCB"
-            onClick={handleExpense}
+        <div>
+          <TextField
+            className="transaction-label transactionItem"
+            inputRef={title}
+            id="standard-basic"
+            label="Text"
+            variant="standard"
           />
-          <label for="incomeCD"> Income</label>
-          <input type="checkbox" className="incomeCB" onClick={handleIncome} />
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            className="transaction-amount transactionItem"
+            inputRef={amount}
+            id="standard-number"
+            label="Amount"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="standard"
+          />
         </div>
-        <Button
-          sx={{ color: purple[900], bgcolor: purple[200] }}
-          onClick={addNewTransaction}
-        >
-          {" "}
-          Add
-        </Button>
+        <div>
+          <p>Select:</p>
+          <div className="flex justify-around">
+            <label for="expenseCD"> Expense:</label>
+            <input
+              type="checkbox"
+              defaultChecked={true}
+              className="expenseCB"
+              onClick={handleExpense}
+            />
+            &nbsp;&nbsp;
+            <label for="incomeCD"> Income</label>
+            <input
+              type="checkbox"
+              className="incomeCB"
+              onClick={handleIncome}
+            />
+          </div>
+        </div>
+        <div>
+          <br />
+          <Button
+            sx={{ color: purple[900], bgcolor: purple[200] }}
+            onClick={addNewTransaction}
+          >
+            {" "}
+            Add
+          </Button>
+        </div>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>

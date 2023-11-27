@@ -23,44 +23,38 @@ body,
   display: grid;
   grid: 1fr / 1fr;
 }
-.mainContent {
-  display: flex;
-  justify-content: center;
-}
 
 .mainPage {
   width: 100%;
+  height: 1vh;
   display: flex;
   justify-content: center;
 }
 .expensePaper {
-  width: 25%;
-  height: 100%;
+  width: 33%;
+  height: max-content;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  justify-content: space-around;
 }
 .historyPaper {
   width: 15%;
-  height: 80%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin: 35px;
-  padding: 5px;
-  margin-top: 50px;
+  position: absolute;
+  left: 10px;
+  top: 20%;
   overflow: hidden;
-}
-.w-full {
-  width: 100%;
 }
 .row {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 .row-flex {
   display: flex;
@@ -70,10 +64,7 @@ body,
 .income-expense-container {
   display: flex;
   flex-direction: row;
-}
-.income-expense-container > p {
-  width: 45%;
-  margin: 5px;
+  justify-content: space-around;
 }
 .transactionItem {
   width: 7rem;
@@ -93,7 +84,12 @@ w-50 {
 .button:hover {
   background-color: #146dc6ab;
 }
-
+.new-transaction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-around;
+}
 .top-left {
   position: absolute;
   top: 68px;

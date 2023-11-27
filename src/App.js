@@ -100,7 +100,7 @@ export default function App() {
         {pageSelect === "budget" ? (
           <BudgetPage key="budgetpage" loggedIn={isLoggedIn} />
         ) : null}
-        <DateTime />
+        {/* <DateTime /> */}
       </div>
     </div>
   );
