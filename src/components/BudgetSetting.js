@@ -1,38 +1,52 @@
 import {User} from '../App'
 import {DateTime} from '../App'
-import { useState, useEffect } from 'react'
-import {useTime} from '../util/time'
+import React, { useState, useEffect} from 'react';
+import { getDate } from '../util/time'
+import { create } from '@mui/material/styles/createTransitions';
+import { styled, alpha, Box } from '@mui/system';
+import { Slider } from '@mui/material';
+import DiscreteSlider from './Slide';
+
+const BudgetPage = ({loggedIn, UseTime, upcomingPaycheck, setUpcomingPaycheck, setNextPaycheckDay, setProjectedSavings}) => {
 
 
 
-const BudgetPage = (loggedIn) => {
 
-
-    let updatingDate = useTime()
+    let updatingDate = UseTime()
     const todaysDate = new Date().toISOString().split('T')[0]
-    const [upcomingPaycheck, setUpcomingPaycheck] = useState(false)
+    let nextPaycheckDay = null
+    let nextPaycheckMonth = null
+    let paycheckDate = null
+    let numWeeks = 2
+
+    const addNextDay = () => {
+        setUpcomingPaycheck(true)
+        paycheckDate.setDate(paycheckDate.getDate() + numWeeks * 7)
+        nextPaycheckDay = paycheckDate.getDate() + 1
+        nextPaycheckMonth = paycheckDate.getMonth() + 1;
+        console.log(nextPaycheckDay, nextPaycheckMonth)
+        setNextPaycheckDay({day: nextPaycheckDay, month: nextPaycheckMonth})
+    }
+
+   
+
+
 
     const paycheckSelection = (e) => {
-        let paycheckDate = e.target.value;
-        let numWeeks = 2
-        paycheckDate = new Date(paycheckDate)
-        paycheckDate.setDate(paycheckDate.getDate() + numWeeks * 7)
-        let nextPaycheckDay = paycheckDate.getDate() + 1
-        let nextPaycheckMonth = paycheckDate.getMonth() + 1;
-        
-        if(User.incomeFrequency === 'bi-weekly'){
-            
+
+            paycheckDate = e.target.value
+            paycheckDate = new Date(paycheckDate)
+            paycheckDate.setDate(paycheckDate.getDate() + numWeeks * 7)
+            nextPaycheckDay = paycheckDate.getDate() + 1
+            nextPaycheckMonth = paycheckDate.getMonth() + 1;
             if(updatingDate.month === nextPaycheckMonth && updatingDate.date + 1 === nextPaycheckDay){
-                setUpcomingPaycheck(true)
-                paycheckDate.setDate(paycheckDate.getDate() + numWeeks * 7)
-                nextPaycheckDay = paycheckDate.getDate() + 1
-                nextPaycheckMonth = paycheckDate.getMonth() + 1;
+                addNextDay()
             }
             else(
                 setUpcomingPaycheck(false)
             )
-        }
     }
+
 
 
     let firstPaycheckDate = ''
@@ -48,36 +62,37 @@ const BudgetPage = (loggedIn) => {
 
     const semiMonthlySecondPaycheckHandler = (e) => {
         secondPaycheckDate = e.target.value.split('-')
-        console.log(Number(secondPaycheckDate[2]))
         secondPaycheckDate = Number(secondPaycheckDate[2])
         SemiMonthlyHandler()
     }
 
     const SemiMonthlyHandler = () => {
 
-        if(updatingDate.date + 1 === secondPaycheckDate){
+        if(updatingDate.date === (secondPaycheckDate + 1) || updatingDate.date === (firstPaycheckDate + 1)){
             setUpcomingPaycheck(true)
         }
         else(
             setUpcomingPaycheck(false)
         )
-        if(updatingDate.date + 1 === firstPaycheckDate){
-            setUpcomingPaycheck(true)
-        }
-        else(
-            setUpcomingPaycheck(false)
-        )
+        // if(updatingDate.date + 1 === firstPaycheckDate){
+        //     setUpcomingPaycheck(true)
+        // }
+        // else(
+        //     setUpcomingPaycheck(false)
+        // )
     }
-
     
-    if (loggedIn.loggedIn){
+
+
+    if (loggedIn){
     return(
+        <>
         <div className="budget-container">
             <div>Personalize Your Budget Here</div>
             {(User.incomeFrequency === 'bi-weekly') ? (
                 <div>
                     <p>When did you last get paid: </p> 
-                    <input key="calander-input" onSelect={paycheckSelection} selectMultiple="true" selectMin="2" selectMax="2"  type="date" max={todaysDate} /> 
+                    <input key="calander-input" onSelect={paycheckSelection}  type="date" max={todaysDate} /> 
                 </div>
             ) : null}
 
@@ -101,12 +116,26 @@ const BudgetPage = (loggedIn) => {
                     </div>
                 )
             ) : null}
-            
+
+            <div>
+                <p>What pertage of your income would you like to save?</p>
+                    <DiscreteSlider 
+                    key="discreteSlider"
+                    setProjectedSavings={setProjectedSavings}
+                    />
+            </div>
+
+
+
         </div>
+        </>
     )}
-    
+
     return(
+        <>
         <h1>Please Log In</h1>
+        </>
+
     )
 
 }

@@ -120,6 +120,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
             variant="button"
             display="block"
             sx={{ flexGrow: 1 }}
+            onClick={() => setPageSelect("overview")}
           >
             Overview
           </Typography>{" "}
