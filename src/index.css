@@ -18,6 +18,7 @@ body,
 #root {
   margin: 0px;
   width: 100%;
+  background-color: #eeeeee;
 }
 #root {
   display: grid;
@@ -46,9 +47,11 @@ body,
 }
 .historyPaper {
   width: 20%;
-  min-width: fit-content;
   position: relative;
-  left: 10px;
+  margin: 15px;
+  min-width: 300px;
+  min-height: 180px;
+  overflow: hidden;
 }
 .incomeExpense {
   display: flex;
@@ -124,6 +127,10 @@ w-50 {
   flex-direction: column;
   justify-content: center;
   align-content: space-around;
+  border-radius: 25px;
+  border: solid rgba(0, 0, 0, 0.15) 1px;
+  box-shadow: 3px 3px 13px 0px rgba(116, 116, 116, 0.505);
+  padding: 10px;
 }
 .top-left {
   position: absolute;
@@ -131,4 +138,10 @@ w-50 {
   left: 5px;
   padding: 3px;
   width: min-content;
+}
+.balance {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px;
 }
