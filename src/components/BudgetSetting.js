@@ -4,6 +4,8 @@ import { useState } from "react";
 import Paper from "@mui/material/Paper";
 
 const BudgetPage = (loggedIn) => {
+  let updatingDate = useTime();
+  const todaysDate = new Date().toISOString().split("T")[0];
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
 
   const paycheckSelection = (e) => {

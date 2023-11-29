@@ -4,13 +4,10 @@ import { getDate } from "../App";
 import Typography from "@mui/material/Typography";
 
 export default function History({ historyArr }) {
-  console.log(getDate());
-
   const historyOverview = historyArr.slice(-4);
   const addCommaToNumbers = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
-  console.log();
   return (
     <div className="spending-history">
       <h2>History:</h2>
