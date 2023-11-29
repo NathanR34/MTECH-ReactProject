@@ -126,7 +126,7 @@ export default function ModalPopup({ setIsLoggedIn }) {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} href="./">
+            <Button onClick={handleClose} href="../App">
               Cancel
             </Button>
             <Button onClick={addUser} href="../App">

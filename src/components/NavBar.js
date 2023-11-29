@@ -231,7 +231,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
               <Button
                 color="inherit"
                 sx={{ flexGrow: 1 }}
-                onClick={() => setPageSelect({ text })}
+                onClick={() => setPageSelect(`${text}`)}
               >
                 {text}
               </Button>
