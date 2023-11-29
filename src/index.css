@@ -50,6 +50,24 @@ body,
   position: relative;
   left: 10px;
 }
+.incomeExpense {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 150px;
+  align-items: center;
+  height: fit-content;
+}
+.incomeExpense > p {
+  font-size: x-large;
+  padding: 0;
+  line-height: 0.01;
+}
+.green {
+  color: rgb(1, 116, 1);
+}
+.red {
+  color: red;
+}
 .spending-history {
   min-width: fit-content;
   display: flex;

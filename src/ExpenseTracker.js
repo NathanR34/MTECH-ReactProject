@@ -2,6 +2,7 @@ import { User } from "./App";
 import History from "./components/history";
 import NewTransaction from "./components/NewTransaction";
 import Paper from "@mui/material/Paper";
+import Card from "@mui/material/Card";
 
 export default function ExpenseTracker({
   loggedIn,
@@ -24,9 +25,14 @@ export default function ExpenseTracker({
             </div>
           </div>
           <div className="row income-expense-container">
-            <div>Income:&nbsp; {addCommaToNumbers(User.income)} </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <div>Expense:&nbsp; 0</div>
+            <Card className="incomeExpense flex" variant="outlined">
+              <h4>Income</h4>
+              <p className="green">+$ {addCommaToNumbers(User.income)}</p>{" "}
+            </Card>
+            <Card className="incomeExpense flex" variant="outlined">
+              <h4>Expense</h4>
+              <p className="red"> -$ &nbsp; 0</p>
+            </Card>
           </div>
           <div className="row">
             <NewTransaction
