@@ -165,10 +165,11 @@ export default function SimpleDialogDemo({ setPageSelect }) {
           <Typography display="block" sx={{ flexGrow: 1 }}>
             Budget App
           </Typography>{" "}
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: "none", md: "flex" } }} className="w-60">
             <Button
               color="inherit"
               sx={{ flexGrow: 1 }}
+              className="w-33"
               onClick={() => setPageSelect("Home")}
             >
               {" "}

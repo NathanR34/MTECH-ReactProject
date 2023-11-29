@@ -22,14 +22,9 @@ export default function ExpenseTracker({
           sx={{ bgcolor: grey[50] }}
           elevation={5}
         >
-          <div className="row">
+          <div className="row top">
             <h1> Welcome {User.firstName} </h1>
-            <Card
-              elevation={2}
-              raised
-              className="balance flex"
-              variant="outlined"
-            >
+            <Card className="balance flex" variant="outlined">
               <h3>YOUR BALANCE</h3>
               <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
             </Card>
