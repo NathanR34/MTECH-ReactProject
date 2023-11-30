@@ -1,7 +1,7 @@
 "use client";
 import Navbar from "./components/NavBar";
 import ExpenseTracker from "./ExpenseTracker";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import BudgetPage from "./components/BudgetSetting";
 import ModalPopup from "./components/ModalPopup";
 import NavBar from "./components/NavBar";
@@ -10,6 +10,9 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { UseTime } from "./util/time";
+import { getDate } from "./util/time";
+import ExpectedSavings from "./components/ExpectedSavings";
 
 export const User = {
   firstName: null,
@@ -19,60 +22,48 @@ export const User = {
   annual: 0,
 };
 
-export const getDate = () => {
-  const today = new Date();
-  const month = today.getMonth();
-  const year = today.getFullYear();
-  const date = today.getDate();
-  const hour = today.getHours();
-  const minute = today.getMinutes();
-  const second = today.getSeconds();
-  const time = hour + ":" + minute + ":" + second;
-  const currentDate = month + "/" + date + "/" + year;
-  return currentDate + " " + time;
-};
-
-export const DateTime = () => {
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const year = today.getFullYear();
-  const date = today.getDate();
-  const fullDate = month + "/" + date + "/" + year;
-  const [currentDate, setCurrentDate] = useState(fullDate);
-  useEffect(() => {
-    var timer = setInterval(() => setCurrentDate(fullDate), 10000);
-    return function cleanup() {
-      clearInterval(timer);
-    };
-  });
-  const card = (
-    <React.Fragment>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Todays Date
-        </Typography>
-        <Typography variant="h5" component="div">
-          {currentDate}
-        </Typography>
-      </CardContent>
-    </React.Fragment>
-  );
-  return (
-    <Box className="top-left">
-      <Card variant="outlined">{card}</Card>
-    </Box>
-  );
-};
-
 export default function App() {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [pageSelect, setPageSelect] = useState("Home");
+  const [pageSelect, setPageSelect] = useState("home");
   const [historyArr, setHistoryArr] = useState([]);
+  const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
+  const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false);
+  const [projectedSavings, setProjectedSavings] = useState(null);
+
+  UseTime();
 
   const addTransaction = (newTran) => {
     setHistoryArr([...historyArr, newTran]);
   };
+
+  let updatingDate = UseTime();
+
+  useEffect(() => {
+    console.log(nextPaycheckDayObj[0], nextPaycheckDayObj[1]);
+    const addPaycheck = () => {
+      if (upcomingPaycheck === true) {
+        if (updatingDate.second === 23) {
+          const newTran = {
+            title: "Paycheck",
+            amount: User.income,
+            date: getDate(),
+          };
+          User.cash = Number(User.cash) + Number(newTran.amount);
+          addTransaction(newTran);
+          setUpcomingPaycheck(false);
+        }
+      }
+    };
+
+    if (
+      updatingDate.date === nextPaycheckDayObj[0] &&
+      updatingDate.month === nextPaycheckDayObj[1]
+    ) {
+      addPaycheck();
+    }
+    console.log(nextPaycheckDayObj);
+  }, [updatingDate]);
 
   const showModal = (e) => {
     console.log(e.target);

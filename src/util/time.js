@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import BudgetPage from '../components/BudgetSetting';
 
-export const useTime = () => {
+
+
+export const UseTime = () => {
     const today = new Date();
     const month = today.getMonth() + 1; 
     const year = today.getFullYear();
@@ -9,10 +12,16 @@ export const useTime = () => {
     const minute = today.getMinutes();
     const hour = today.getHours();
     const fullDate = month + '/' + date + '/' + year + ' ' + hour + ':' + minute + ':' + second;
-    const tomorrow = {month:  month , date: date, second: second }
-    const [currentDate, setCurrentDate] = useState({month: month, date: date, second: second });
+    const tomorrow = {month:  month , date: date, second: second, hour: hour }
+    const [currentDate, setCurrentDate] = useState({month: month, date: date, second: second, hour: hour });
     useEffect (() => {
-      var timer = setInterval(() =>setCurrentDate(tomorrow), 100000)
+      var timer = setInterval(() => {
+        setCurrentDate(tomorrow)
+
+
+
+        // console.log(tomorrow)
+      }, 100000)
       return function cleanup(){
         clearInterval(timer)
       }
@@ -33,3 +42,5 @@ export const useTime = () => {
     const currentDate = month + '/' + date + '/' + year;
     return currentDate + ' ' + time
   }
+
+
