@@ -2,27 +2,52 @@ import * as React from 'react';
 import { styled, alpha, Box } from '@mui/system';
 import { Slider as BaseSlider, sliderClasses } from '@mui/base/Slider';
 import { User } from '../App';
+import { useEffect, useState, createContext, useContext } from 'react';
 
-let savingsValue = 25 + '%'
+
+const SavingsContext = createContext();
 
 
-export default function DiscreteSlider({setProjectedSavings}) {
+export const SavingsProvider = ({children}) => {
+  const [savingsValue, setSavingsValue] = useState(30)
 
-    
+  return (
+    <SavingsContext.Provider value={{ savingsValue, setSavingsValue }}>
+      {children}
+    </SavingsContext.Provider>
+  )
+}
+
+export const useSavings = () => {
+  const context = useContext(SavingsContext);
+  return context;
+};
+
+export default function DiscreteSlider({setProjectedSavings, setAvailableSpending, projectedSavings}) {
+
+  const { savingsValue, setSavingsValue } = useSavings();
+  
+    useEffect(() => {
+        setAvailableSpending( (User.income - projectedSavings) * 2)
+    }, [projectedSavings])
 
     const savingsHandler = (e) => {
-        console.log(e.target.value)
-        savingsValue = e.target.value + '%'
-        console.log( User.income * (e.target.value * .01))
+      
+      setSavingsValue(e.target.value)
+        // savingsValue = e.target.value + '%'
         setProjectedSavings( User.income * (e.target.value * .01))
     }
-
+    function SliderValueLabel() {
+      return <span className="valueLabel">{savingsValue}</span>;
+    }
 
   return (
     <Box sx={{ width: 300 }}>
       <Slider
+        key={'slider'}
         aria-label="Temperature"
-        defaultValue={25}
+        value={savingsValue}
+        // getAriaValue={valuetext}
         step={5}
         marks
         min={10}
@@ -34,11 +59,18 @@ export default function DiscreteSlider({setProjectedSavings}) {
   );
 }
 
+// interface SliderValueLabelProps {
+//   children: React.ReactElement;
+// }
+
+// function SliderValueLabel({ children }: SliderValueLabelProps) {
+//   return <span className="valueLabel">{children}</span>;
+// }
+// function valuetext(value: number) {
+//   return `${value}°C`;
+// }
 
 
-function SliderValueLabel() {
-  return <span className="valueLabel">{savingsValue}</span>;
-}
 
 
 const blue = {

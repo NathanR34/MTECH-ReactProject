@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import {getDate} from '../util/time'
 
 
-export default function NewTransaction({ addTransaction }) {
+export default function NewTransaction({ addTransaction, availableSpending,setAvailableSpending }) {
   let expenseIncomeHandler = null;
   let checkboxValidation = false;
   const [open, setOpen] = useState(false);
@@ -66,6 +66,7 @@ export default function NewTransaction({ addTransaction }) {
         User.cash = Number(User.cash) + Number(newTran.amount);
       } else if (expenseIncomeHandler === "subtract") {
         User.cash = User.cash - newTran.amount;
+        setAvailableSpending(availableSpending - newTran.amount)
       }
     } else {
       handleClick();

@@ -8,7 +8,7 @@ import NavBar from './components/NavBar'
 import {UseTime} from './util/time'
 import { getDate } from "./util/time";
 import ExpectedSavings from "./components/ExpectedSavings";
-
+import { SavingsProvider } from "./components/Slider";
 
 export const User = {
   firstName: null,
@@ -27,7 +27,7 @@ export default function App() {
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false)
   const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false)
   const [projectedSavings, setProjectedSavings] = useState(null)
-
+  const [availableSpending, setAvailableSpending] = useState(null)
 
 
   UseTime()
@@ -70,6 +70,7 @@ export default function App() {
   };
 
   return (
+    <SavingsProvider>
       <div className="App">
         <NavBar setPageSelect={setPageSelect} />
         <div className="mainContent">
@@ -85,6 +86,8 @@ export default function App() {
               setLogIn={setIsLoggedIn}
               historyArr={historyArr}
               addTransaction={addTransaction}
+              availableSpending={availableSpending}
+              setAvailableSpending={setAvailableSpending}
             />
           ) : null}
           {pageSelect === "budget" ? (
@@ -98,16 +101,20 @@ export default function App() {
               nextPaycheckDayObj={nextPaycheckDayObj}
               setNextPaycheckDay={setNextPaycheckDay}
               setProjectedSavings={setProjectedSavings}
+              projectedSavings={projectedSavings}
+              setAvailableSpending={setAvailableSpending}
             />
           ) : null}
           {}
           {pageSelect === 'overview' ? (
             <ExpectedSavings 
               projectedSavings={projectedSavings}
+              availableSpending={availableSpending}
             />
           ) : null}
           {/* <DateTime /> */}
         </div>
       </div>
+    </SavingsProvider>
   );
 }
