@@ -7,7 +7,11 @@ import Alert from "@mui/material/Alert";
 import { useRef, useState } from "react";
 import { getDate } from "../util/time";
 
-export default function NewTransaction({ addTransaction, availableSpending,setAvailableSpending }) {
+export default function NewTransaction({
+  addTransaction,
+  availableSpending,
+  setAvailableSpending,
+}) {
   let expenseIncomeHandler = null;
   let checkboxValidation = false;
   const [open, setOpen] = useState(false);
@@ -70,7 +74,7 @@ export default function NewTransaction({ addTransaction, availableSpending,setAv
         User.cash = Number(User.cash) + Number(newTran.amount);
       } else if (expenseIncomeHandler === "subtract") {
         User.cash = User.cash - newTran.amount;
-        setAvailableSpending(availableSpending - newTran.amount)
+        setAvailableSpending(availableSpending - newTran.amount);
       }
     } else {
       handleClick();
@@ -117,18 +121,16 @@ export default function NewTransaction({ addTransaction, availableSpending,setAv
               type="checkbox"
               className="incomeCB"
               onClick={handleIncome}
-            />
+            />{" "}
+            <Button
+              className="ml-5"
+              sx={{ color: purple[900], bgcolor: purple[200] }}
+              onClick={addNewTransaction}
+            >
+              {" "}
+              Add
+            </Button>
           </div>
-        </div>
-        <div>
-          <br />
-          <Button
-            sx={{ color: purple[900], bgcolor: purple[200] }}
-            onClick={addNewTransaction}
-          >
-            {" "}
-            Add
-          </Button>
         </div>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
