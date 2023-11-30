@@ -11,6 +11,10 @@ export default function NewTransaction({
   addTransaction,
   availableSpending,
   setAvailableSpending,
+  setMonthlyIncome,
+  monthlyIncome,
+  setMonthlyExpenses,
+  monthlyExpenses
 }) {
   let expenseIncomeHandler = null;
   let checkboxValidation = false;
