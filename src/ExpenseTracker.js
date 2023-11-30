@@ -4,6 +4,10 @@ import NewTransaction from "./components/NewTransaction";
 import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import { grey } from "@mui/material/colors";
+import { useMonthlyContext } from './App';
+
+
+
 
 export default function ExpenseTracker({
   loggedIn,
@@ -12,6 +16,10 @@ export default function ExpenseTracker({
   availableSpending,
   setAvailableSpending
 }) {
+
+  const { monthlyExpenses, setMonthlyExpenses, monthlyIncome, setMonthlyIncome } = useMonthlyContext();
+
+
   const addCommaToNumbers = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -34,11 +42,11 @@ export default function ExpenseTracker({
           <div className="row income-expense-container">
             <Card className="incomeExpense flex" variant="outlined">
               <h4>Income</h4>
-              <p className="green">+$ {addCommaToNumbers(User.income)}</p>{" "}
+              <p className="green">+$ {addCommaToNumbers(monthlyIncome)}</p>{" "}
             </Card>
             <Card className="incomeExpense flex" variant="outlined">
               <h4>Expense</h4>
-              <p className="red"> -$ &nbsp; 0</p>
+              <p className="red"> -$ &nbsp; {monthlyExpenses}</p>
             </Card>
           </div>
           <div className="row">
@@ -56,6 +64,10 @@ export default function ExpenseTracker({
               availableSpending={availableSpending}
               addTransaction={addTransaction}
               setAvailableSpending={setAvailableSpending}
+              setMonthlyExpenses={setMonthlyExpenses}
+              monthlyExpenses={monthlyExpenses}
+              monthlyIncome={monthlyIncome}
+              setMonthlyIncome={setMonthlyIncome}
             />
           </div>
         </Paper>

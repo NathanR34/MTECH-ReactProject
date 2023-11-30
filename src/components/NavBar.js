@@ -24,7 +24,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { User } from "../App";
 const emails = ["Name One", "Name Two", "Name Three"];
 const drawerWidth = 150;
 
@@ -170,7 +169,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
               color="inherit"
               sx={{ flexGrow: 1 }}
               className="w-33"
-              onClick={() => setPageSelect("Home")}
+              onClick={() => setPageSelect("home")}
             >
               {" "}
               Home
@@ -178,7 +177,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
             <Button
               color="inherit"
               sx={{ flexGrow: 1 }}
-              onClick={() => setPageSelect("Budget")}
+              onClick={() => setPageSelect("budget")}
             >
               {" "}
               Budget
@@ -186,7 +185,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
             <Button
               color="inherit"
               sx={{ flexGrow: 1 }}
-              onClick={() => setPageSelect("Overview")}
+              onClick={() => setPageSelect("overview")}
             >
               {" "}
               Overview

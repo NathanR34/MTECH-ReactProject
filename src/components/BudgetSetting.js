@@ -1,14 +1,9 @@
-import { User } from "../App";
-import { DateTime } from "../App";
-import React from "react";
-import { getDate } from "../util/time";
+import {User} from '../App'
+import DiscreteSlider from './Slider';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { create } from "@mui/material/styles/createTransitions";
-import DiscreteSlider from "./Slider";
 import Paper from "@mui/material/Paper";
 import { grey } from "@mui/material/colors";
-
 import Typography from "@mui/material/Typography";
 
 const BudgetPage = ({

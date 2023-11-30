@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import BudgetPage from '../components/BudgetSetting';
 
 
 
@@ -9,10 +8,8 @@ export const UseTime = () => {
     const year = today.getFullYear();
     const date = today.getDate();
     const second = today.getSeconds();
-    const minute = today.getMinutes();
     const hour = today.getHours();
-    const fullDate = month + '/' + date + '/' + year + ' ' + hour + ':' + minute + ':' + second;
-    const tomorrow = {month:  month , date: date, second: second, hour: hour }
+    const tomorrow = {month:  month , date: date, second: second, hour: hour, year: year }
     const [currentDate, setCurrentDate] = useState({month: month, date: date, second: second, hour: hour });
     useEffect (() => {
       var timer = setInterval(() => {

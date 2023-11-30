@@ -7,15 +7,15 @@ import Alert from "@mui/material/Alert";
 import { useRef, useState } from "react";
 import { getDate } from "../util/time";
 
-export default function NewTransaction({ addTransaction, availableSpending,setAvailableSpending }) {
+export default function NewTransaction({ addTransaction, availableSpending,setAvailableSpending, monthlyExpenses, setMonthlyExpenses, setMonthlyIncome, monthlyIncome }) {
   let expenseIncomeHandler = null;
   let checkboxValidation = false;
   const [open, setOpen] = useState(false);
   const title = useRef(null);
   const amount = useRef(null);
-  const addIncomeAmount = () => {
-    console.log(User.income);
-  };
+  let transactionType = 'expense'
+
+
 
   const checkboxHandler = () => {
     const expense = document.querySelector(".expenseCB");
@@ -23,10 +23,12 @@ export default function NewTransaction({ addTransaction, availableSpending,setAv
 
     if (expense.checked === true) {
       expenseIncomeHandler = "subtract";
+      transactionType ='expense'
       income.checked = false;
     }
     if (income.checked === true) {
       expenseIncomeHandler = "add";
+      transactionType = 'income'
       expense.checked = false;
     }
     if (income.checked === true || expense.checked === true) {
@@ -51,31 +53,45 @@ export default function NewTransaction({ addTransaction, availableSpending,setAv
     setOpen(false);
   };
   const addNewTransaction = () => {
-    addIncomeAmount();
+    // addIncomeAmount();
     checkboxHandler();
     if (checkboxValidation === false) {
       return handleClick();
     }
 
-    if (title && amount) {
+
+    if (title.current.value && amount.current.value) {
       const newTran = {
         title: title.current.value,
         amount: amount.current.value,
         date: getDate(),
+        type: transactionType,
       };
       title.current.value = "";
       amount.current.value = "";
       addTransaction(newTran);
       if (expenseIncomeHandler === "add") {
         User.cash = Number(User.cash) + Number(newTran.amount);
+        setMonthlyIncome(Number(monthlyIncome) + Number(newTran.amount))
       } else if (expenseIncomeHandler === "subtract") {
+        setMonthlyExpenses(Number(monthlyExpenses) + Number(newTran.amount))
         User.cash = User.cash - newTran.amount;
         setAvailableSpending(availableSpending - newTran.amount)
+        
       }
+      console.log(newTran)
     } else {
       handleClick();
     }
   };
+
+
+  const handleInput = (event) => {
+    const inputValue = event.target.value;
+    const sanitizedValue = inputValue.replace(/^-/, '');
+    event.target.value = sanitizedValue;
+  };
+
 
   return (
     <>
@@ -98,7 +114,9 @@ export default function NewTransaction({ addTransaction, availableSpending,setAv
             InputLabelProps={{
               shrink: true,
             }}
-            variant="standard"
+            inputProps={{ min: "0" }}
+          onInput={handleInput}
+          variant="standard"
           />
         </div>
         <div>

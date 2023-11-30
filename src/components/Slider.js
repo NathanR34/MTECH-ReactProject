@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, alpha, Box } from "@mui/system";
+import { styled, alpha } from "@mui/system";
 import { Slider as BaseSlider, sliderClasses } from "@mui/base/Slider";
 import { User } from "../App";
 import { useEffect, useState, createContext, useContext } from "react";
@@ -28,10 +28,10 @@ export default function DiscreteSlider({
   projectedSavings,
 }) {
   const { savingsValue, setSavingsValue } = useSavings();
-
-  useEffect(() => {
-    setAvailableSpending((User.income - projectedSavings) * 2);
-  }, [projectedSavings]);
+  
+    useEffect(() => {
+        setAvailableSpending( (User.income - projectedSavings) * 2)
+    }, [projectedSavings, setAvailableSpending])
 
   const savingsHandler = (e) => {
     setSavingsValue(e.target.value);

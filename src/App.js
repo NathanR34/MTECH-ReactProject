@@ -1,15 +1,10 @@
 "use client";
-import Navbar from "./components/NavBar";
 import ExpenseTracker from "./ExpenseTracker";
-import { useEffect, useState, useContext, createContext } from "react";
+import { useEffect, useState, useContext, createContext, useCallback } from "react";
 import BudgetPage from "./components/BudgetSetting";
 import ModalPopup from "./components/ModalPopup";
 import NavBar from "./components/NavBar";
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import { UseTime } from "./util/time";
 import { getDate } from "./util/time";
 import ExpectedSavings from "./components/ExpectedSavings";
@@ -23,10 +18,31 @@ export const User = {
   annual: 0,
 };
 
+
+const MonthlyContext = createContext()
+
+export const MonthlyContextProvider = ({ children }) => {
+  const [monthlyExpenses, setMonthlyExpenses] = useState(0);
+  const [monthlyIncome, setMonthlyIncome] = useState(0);
+
+  return (
+    <MonthlyContext.Provider value={{ monthlyExpenses, setMonthlyExpenses, monthlyIncome, setMonthlyIncome }}>
+      {children}
+    </MonthlyContext.Provider>
+  );
+};
+
+export const useMonthlyContext = () => {
+  return useContext(MonthlyContext);
+}
+
+
+
+
 export default function App() {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [pageSelect, setPageSelect] = useState("Home");
+  const [pageSelect, setPageSelect] = useState("home");
   const [historyArr, setHistoryArr] = useState([]);
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
   const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false);
@@ -35,89 +51,82 @@ export default function App() {
 
   UseTime();
 
-  const addTransaction = (newTran) => {
-    setHistoryArr([...historyArr, newTran]);
-  };
+  const addTransaction = useCallback((newTran) => {
+    setHistoryArr((prevHistory) => [...prevHistory, newTran]);
+  }, []);
 
   let updatingDate = UseTime();
 
   useEffect(() => {
-    console.log(nextPaycheckDayObj[0], nextPaycheckDayObj[1]);
-    const addPaycheck = () => {
-      if (upcomingPaycheck === true) {
-        if (updatingDate.second === 23) {
-          const newTran = {
-            title: "Paycheck",
-            amount: User.income,
-            date: getDate(),
-          };
-          User.cash = Number(User.cash) + Number(newTran.amount);
-          addTransaction(newTran);
-          setUpcomingPaycheck(false);
+        const addPaycheck = () => {
+          if(upcomingPaycheck === true){
+            if (updatingDate.second === 23){
+                const newTran = {
+                    title: 'Paycheck',
+                    amount: User.income,
+                    date: getDate()
+                  };
+                  User.cash = Number(User.cash) + Number(newTran.amount)
+                  addTransaction(newTran);
+                  setUpcomingPaycheck(false)
+            }
+          }
         }
-      }
-    };
+        
+        if (updatingDate.date === nextPaycheckDayObj[0] && updatingDate.month === nextPaycheckDayObj[1]){
+          addPaycheck()
 
-    if (
-      updatingDate.date === nextPaycheckDayObj[0] &&
-      updatingDate.month === nextPaycheckDayObj[1]
-    ) {
-      addPaycheck();
-    }
-    console.log(nextPaycheckDayObj);
-  }, [updatingDate]);
-
-  const showModal = (e) => {
-    console.log(e.target);
-    setModalDisplay(true);
-  };
+        }
+}, [updatingDate, addTransaction, nextPaycheckDayObj, upcomingPaycheck])
 
   return (
     <SavingsProvider>
-      <div className="App">
-        <NavBar setPageSelect={setPageSelect} />
-        <div className="mainContent">
-          <ModalPopup
-            displayModal={modalDisplay}
-            setDisplayModal={setModalDisplay}
-            setIsLoggedIn={setIsLoggedIn}
-          />
-          {pageSelect === "Home" ? (
-            <ExpenseTracker
-              key="expensetracker"
-              loggedIn={isLoggedIn}
-              setLogIn={setIsLoggedIn}
-              historyArr={historyArr}
-              addTransaction={addTransaction}
-              availableSpending={availableSpending}
-              setAvailableSpending={setAvailableSpending}
+      <MonthlyContextProvider>
+        <div className="App">
+          <NavBar setPageSelect={setPageSelect} />
+          <div className="mainContent">
+            <ModalPopup
+              displayModal={modalDisplay}
+              setDisplayModal={setModalDisplay}
+              setIsLoggedIn={setIsLoggedIn}
             />
-          ) : null}
-          {pageSelect === "Budget" ? (
-            <BudgetPage
-              key="budgetpage"
-              loggedIn={isLoggedIn}
-              addTransaction={addTransaction}
-              UseTime={UseTime}
-              upcomingPaycheck={upcomingPaycheck}
-              setUpcomingPaycheck={setUpcomingPaycheck}
-              nextPaycheckDayObj={nextPaycheckDayObj}
-              setNextPaycheckDay={setNextPaycheckDay}
-              setProjectedSavings={setProjectedSavings}
-              projectedSavings={projectedSavings}
-              setAvailableSpending={setAvailableSpending}
-            />
-          ) : null}
-          {}
-          {pageSelect === "Overview" ? (
-            <ExpectedSavings
-              projectedSavings={projectedSavings}
-              availableSpending={availableSpending}
-            />
-          ) : null}
-          {/* <DateTime /> */}
+            {pageSelect === "home" ? (
+              <ExpenseTracker
+                key="expensetracker"
+                loggedIn={isLoggedIn}
+                setLogIn={setIsLoggedIn}
+                historyArr={historyArr}
+                addTransaction={addTransaction}
+                availableSpending={availableSpending}
+                setAvailableSpending={setAvailableSpending}
+              />
+            ) : null}
+            {pageSelect === "budget" ? (
+              <BudgetPage 
+                key="budgetpage" 
+                loggedIn={isLoggedIn}
+                addTransaction={addTransaction}
+                UseTime={UseTime}
+                upcomingPaycheck={upcomingPaycheck}
+                setUpcomingPaycheck={setUpcomingPaycheck}
+                nextPaycheckDayObj={nextPaycheckDayObj}
+                setNextPaycheckDay={setNextPaycheckDay}
+                setProjectedSavings={setProjectedSavings}
+                projectedSavings={projectedSavings}
+                setAvailableSpending={setAvailableSpending}
+              />
+            ) : null}
+            {}
+            {pageSelect === 'overview' ? (
+              <ExpectedSavings 
+                projectedSavings={projectedSavings}
+                availableSpending={availableSpending}
+              />
+            ) : null}
+            {/* <DateTime /> */}
+          </div>
         </div>
-      </div>
+      </MonthlyContextProvider>
     </SavingsProvider>
   );
 }

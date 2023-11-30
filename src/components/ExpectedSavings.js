@@ -1,9 +1,8 @@
-import { User } from "../App"
 
 
 export default function ExpectedSavings({projectedSavings, availableSpending}){
 
-    
+
 
     return(
         <>
