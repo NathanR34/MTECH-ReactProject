@@ -9,6 +9,8 @@ export default function ExpenseTracker({
   loggedIn,
   historyArr,
   addTransaction,
+  availableSpending,
+  setAvailableSpending
 }) {
   const addCommaToNumbers = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -51,7 +53,9 @@ export default function ExpenseTracker({
           <div className="row">
             <NewTransaction
               key="newtransaction"
+              availableSpending={availableSpending}
               addTransaction={addTransaction}
+              setAvailableSpending={setAvailableSpending}
             />
           </div>
         </Paper>
