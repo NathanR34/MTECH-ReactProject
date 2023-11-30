@@ -2,6 +2,10 @@ import { User } from "./App";
 import History from "./components/history";
 import NewTransaction from "./components/NewTransaction";
 import Paper from "@mui/material/Paper";
+import { useMonthlyContext } from './App';
+
+
+
 
 export default function ExpenseTracker({
   loggedIn,
@@ -10,6 +14,10 @@ export default function ExpenseTracker({
   availableSpending,
   setAvailableSpending
 }) {
+
+  const { monthlyExpenses, setMonthlyExpenses, monthlyIncome, setMonthlyIncome } = useMonthlyContext();
+
+
   const addCommaToNumbers = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -26,8 +34,8 @@ export default function ExpenseTracker({
             </div>
           </div>
           <div className="row w-full income-expense-container">
-            <div>Income: {addCommaToNumbers(User.income)} </div>
-            <div>Expense: 0</div>
+            <div>Income: {addCommaToNumbers(monthlyIncome)} </div>
+            <div>Expense: {monthlyExpenses}</div>
           </div>
           <div className="row w-full">
             <NewTransaction
@@ -35,6 +43,10 @@ export default function ExpenseTracker({
               availableSpending={availableSpending}
               addTransaction={addTransaction}
               setAvailableSpending={setAvailableSpending}
+              setMonthlyExpenses={setMonthlyExpenses}
+              monthlyExpenses={monthlyExpenses}
+              monthlyIncome={monthlyIncome}
+              setMonthlyIncome={setMonthlyIncome}
             />
           </div>
         </Paper>
@@ -47,36 +59,3 @@ export default function ExpenseTracker({
   }
   return <h1>Please Log In</h1>;
 }
-// export default function ExpenseTracker({loggedIn, historyArr, addTransaction}) {
-
-//     const addCommaToNumbers = (x) => {
-//         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//     }
-
-//     if (loggedIn){
-//         return(
-//             <div className='expense-tracker-container'>
-//                 <div> Welcome {User.firstName} </div>
-//                 <div className='balance'>
-//                     <h3>YOUR BALANCE</h3>
-//                     <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
-//                 </div>
-//                 <div className='income-expense-container'>
-//                     <div>Income: {addCommaToNumbers(User.income)} </div>
-//                     <div>Expense: 0</div>
-//                 </div>
-//                 <History
-//                     key="history"
-//                     historyArr = {historyArr}
-//                 />
-//                 <NewTransaction
-//                 key = "newtransaction"
-//                     addTransaction={addTransaction}
-//                 />
-//             </div>
-//         )
-//     }
-//     return (
-//         <h1>Please Log In</h1>
-//     )
-// }

@@ -29,7 +29,7 @@ export default function DiscreteSlider({setProjectedSavings, setAvailableSpendin
   
     useEffect(() => {
         setAvailableSpending( (User.income - projectedSavings) * 2)
-    }, [projectedSavings])
+    }, [projectedSavings, setAvailableSpending])
 
     const savingsHandler = (e) => {
       

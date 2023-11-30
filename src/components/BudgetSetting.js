@@ -1,10 +1,4 @@
 import {User} from '../App'
-import {DateTime} from '../App'
-import React, { useState, useEffect} from 'react';
-import { getDate } from '../util/time'
-import { create } from '@mui/material/styles/createTransitions';
-import { styled, alpha, Box } from '@mui/system';
-import { Slider } from '@mui/material';
 import DiscreteSlider from './Slider';
 
 const BudgetPage = ({loggedIn, UseTime, upcomingPaycheck, setUpcomingPaycheck, setNextPaycheckDay, setProjectedSavings, setAvailableSpending, projectedSavings}) => {
@@ -74,12 +68,6 @@ const BudgetPage = ({loggedIn, UseTime, upcomingPaycheck, setUpcomingPaycheck, s
         else(
             setUpcomingPaycheck(false)
         )
-        // if(updatingDate.date + 1 === firstPaycheckDate){
-        //     setUpcomingPaycheck(true)
-        // }
-        // else(
-        //     setUpcomingPaycheck(false)
-        // )
     }
     
 
