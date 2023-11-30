@@ -183,7 +183,11 @@ export default function SimpleDialogDemo({ setPageSelect }) {
               {" "}
               Budget
             </Button>
-            <Button disabled color="inherit" sx={{ flexGrow: 1 }}>
+            <Button
+              color="inherit"
+              sx={{ flexGrow: 1 }}
+              onClick={() => setPageSelect("Overview")}
+            >
               {" "}
               Overview
             </Button>

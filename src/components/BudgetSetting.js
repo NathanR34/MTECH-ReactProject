@@ -1,11 +1,15 @@
 import { User } from "../App";
 import { DateTime } from "../App";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { getDate } from "../util/time";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import { create } from "@mui/material/styles/createTransitions";
-import { styled, alpha, Box } from "@mui/system";
-import { Slider } from "@mui/material";
 import DiscreteSlider from "./Slider";
+import Paper from "@mui/material/Paper";
+import { grey } from "@mui/material/colors";
+
+import Typography from "@mui/material/Typography";
 
 const BudgetPage = ({
   loggedIn,
@@ -80,11 +84,11 @@ const BudgetPage = ({
 
   if (loggedIn) {
     return (
-      <>
+      <Paper className="mainPage" elevation={0} sx={{ bgcolor: grey[200] }}>
         <div className="budget-container">
-          <div>Personalize Your Budget Here</div>
+          <Typography variant="h5">Personalize Your Budget Here</Typography>
           {User.incomeFrequency === "bi-weekly" ? (
-            <div>
+            <div className="row-flex">
               <p>When did you last get paid: </p>
               <input
                 key="calander-input"
@@ -94,7 +98,6 @@ const BudgetPage = ({
               />
             </div>
           ) : null}
-
           {User.incomeFrequency === "semi-monthly" ? (
             <div>
               <p>When do you get paid?</p>
@@ -110,22 +113,25 @@ const BudgetPage = ({
               </div>
             </div>
           ) : null}
-
           {upcomingPaycheck === true ? (
             <div>Upcoming Paycheck {User.income}</div>
           ) : null}
+          <Card className="center" variant="outlined">
+            <CardContent>
+              <Typography sx={{ fontSize: 18 }} gutterBottom>
+                What pertage of your income would you like to save?
+              </Typography>
 
-          <div>
-            <p>What pertage of your income would you like to save?</p>
-            <DiscreteSlider
-              key="discreteSlider"
-              setProjectedSavings={setProjectedSavings}
-              projectedSavings={projectedSavings}
-              setAvailableSpending={setAvailableSpending}
-            />
-          </div>
+              <DiscreteSlider
+                key="discreteSlider"
+                setProjectedSavings={setProjectedSavings}
+                projectedSavings={projectedSavings}
+                setAvailableSpending={setAvailableSpending}
+              />
+            </CardContent>
+          </Card>
         </div>
-      </>
+      </Paper>
     );
   }
 

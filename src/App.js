@@ -26,7 +26,7 @@ export const User = {
 export default function App() {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [pageSelect, setPageSelect] = useState("home");
+  const [pageSelect, setPageSelect] = useState("Home");
   const [historyArr, setHistoryArr] = useState([]);
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
   const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false);
@@ -82,7 +82,7 @@ export default function App() {
             setDisplayModal={setModalDisplay}
             setIsLoggedIn={setIsLoggedIn}
           />
-          {pageSelect === "home" ? (
+          {pageSelect === "Home" ? (
             <ExpenseTracker
               key="expensetracker"
               loggedIn={isLoggedIn}
@@ -93,7 +93,7 @@ export default function App() {
               setAvailableSpending={setAvailableSpending}
             />
           ) : null}
-          {pageSelect === "budget" ? (
+          {pageSelect === "Budget" ? (
             <BudgetPage
               key="budgetpage"
               loggedIn={isLoggedIn}
@@ -109,7 +109,7 @@ export default function App() {
             />
           ) : null}
           {}
-          {pageSelect === "overview" ? (
+          {pageSelect === "Overview" ? (
             <ExpectedSavings
               projectedSavings={projectedSavings}
               availableSpending={availableSpending}
