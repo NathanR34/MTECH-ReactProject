@@ -1,6 +1,12 @@
 "use client";
 import ExpenseTracker from "./ExpenseTracker";
-import { useEffect, useState, useContext, createContext, useCallback } from "react";
+import {
+  useEffect,
+  useState,
+  useContext,
+  createContext,
+  useCallback,
+} from "react";
 import BudgetPage from "./components/BudgetSetting";
 import ModalPopup from "./components/ModalPopup";
 import NavBar from "./components/NavBar";
@@ -18,15 +24,21 @@ export const User = {
   annual: 0,
 };
 
-
-const MonthlyContext = createContext()
+const MonthlyContext = createContext();
 
 export const MonthlyContextProvider = ({ children }) => {
   const [monthlyExpenses, setMonthlyExpenses] = useState(0);
   const [monthlyIncome, setMonthlyIncome] = useState(0);
 
   return (
-    <MonthlyContext.Provider value={{ monthlyExpenses, setMonthlyExpenses, monthlyIncome, setMonthlyIncome }}>
+    <MonthlyContext.Provider
+      value={{
+        monthlyExpenses,
+        setMonthlyExpenses,
+        monthlyIncome,
+        setMonthlyIncome,
+      }}
+    >
       {children}
     </MonthlyContext.Provider>
   );
@@ -34,10 +46,7 @@ export const MonthlyContextProvider = ({ children }) => {
 
 export const useMonthlyContext = () => {
   return useContext(MonthlyContext);
-}
-
-
-
+};
 
 export default function App() {
   const [modalDisplay, setModalDisplay] = useState(false);
@@ -58,26 +67,28 @@ export default function App() {
   let updatingDate = UseTime();
 
   useEffect(() => {
-        const addPaycheck = () => {
-          if(upcomingPaycheck === true){
-            if (updatingDate.second === 23){
-                const newTran = {
-                    title: 'Paycheck',
-                    amount: User.income,
-                    date: getDate()
-                  };
-                  User.cash = Number(User.cash) + Number(newTran.amount)
-                  addTransaction(newTran);
-                  setUpcomingPaycheck(false)
-            }
-          }
+    const addPaycheck = () => {
+      if (upcomingPaycheck === true) {
+        if (updatingDate.second === 23) {
+          const newTran = {
+            title: "Paycheck",
+            amount: User.income,
+            date: getDate(),
+          };
+          User.cash = Number(User.cash) + Number(newTran.amount);
+          addTransaction(newTran);
+          setUpcomingPaycheck(false);
         }
-        
-        if (updatingDate.date === nextPaycheckDayObj[0] && updatingDate.month === nextPaycheckDayObj[1]){
-          addPaycheck()
+      }
+    };
 
-        }
-}, [updatingDate, addTransaction, nextPaycheckDayObj, upcomingPaycheck])
+    if (
+      updatingDate.date === nextPaycheckDayObj[0] &&
+      updatingDate.month === nextPaycheckDayObj[1]
+    ) {
+      addPaycheck();
+    }
+  }, [updatingDate, addTransaction, nextPaycheckDayObj, upcomingPaycheck]);
 
   return (
     <SavingsProvider>
@@ -102,8 +113,8 @@ export default function App() {
               />
             ) : null}
             {pageSelect === "budget" ? (
-              <BudgetPage 
-                key="budgetpage" 
+              <BudgetPage
+                key="budgetpage"
                 loggedIn={isLoggedIn}
                 addTransaction={addTransaction}
                 UseTime={UseTime}
@@ -117,8 +128,8 @@ export default function App() {
               />
             ) : null}
             {}
-            {pageSelect === 'overview' ? (
-              <ExpectedSavings 
+            {pageSelect === "overview" ? (
+              <ExpectedSavings
                 projectedSavings={projectedSavings}
                 availableSpending={availableSpending}
               />

@@ -161,7 +161,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
           >
             <MenuIcon sx={{ display: { xs: "flex", md: "none" } }} />
           </IconButton>
-          <Typography display="block" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" display="block" sx={{ flexGrow: 1 }}>
             Budget App
           </Typography>{" "}
           <Box sx={{ display: { xs: "none", md: "flex" } }} className="w-60">
