@@ -14,7 +14,9 @@ export default function NewTransaction({
   setMonthlyIncome,
   monthlyIncome,
   setMonthlyExpenses,
-  monthlyExpenses
+  monthlyExpenses,
+  moneySpent,
+  setMoneySpent
 }) {
   let expenseIncomeHandler = null;
   let checkboxValidation = false;
@@ -85,8 +87,9 @@ export default function NewTransaction({
         setMonthlyExpenses(Number(monthlyExpenses) + Number(newTran.amount))
         User.cash = User.cash - newTran.amount;
         setAvailableSpending(availableSpending - newTran.amount)
+        setMoneySpent(Number(moneySpent) + Number(newTran.amount))
+        console.log(moneySpent)
       }
-      console.log(newTran)
     } else {
       handleClick();
     }
@@ -129,7 +132,7 @@ export default function NewTransaction({
         <div>
           <p>Select:</p>
           <div className="flex justify-around">
-            <label for="expenseCD"> Expense:</label>
+            <label htmlFor="expenseCD"> Expense:</label>
             <input
               type="checkbox"
               defaultChecked={true}
@@ -137,7 +140,7 @@ export default function NewTransaction({
               onClick={handleExpense}
             />
             &nbsp;&nbsp;
-            <label for="incomeCD"> Income</label>
+            <label htmlFor="incomeCD"> Income</label>
             <input
               type="checkbox"
               className="incomeCB"

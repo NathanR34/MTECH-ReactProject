@@ -14,7 +14,9 @@ export default function ExpenseTracker({
   historyArr,
   addTransaction,
   availableSpending,
-  setAvailableSpending
+  setAvailableSpending,
+  moneySpent,
+  setMoneySpent
 }) {
 
   const { monthlyExpenses, setMonthlyExpenses, monthlyIncome, setMonthlyIncome } = useMonthlyContext();
@@ -68,6 +70,8 @@ export default function ExpenseTracker({
               monthlyExpenses={monthlyExpenses}
               monthlyIncome={monthlyIncome}
               setMonthlyIncome={setMonthlyIncome}
+              moneySpent = {moneySpent}
+              setMoneySpent ={setMoneySpent}
             />
           </div>
         </Paper>

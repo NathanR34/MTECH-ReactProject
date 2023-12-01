@@ -42,6 +42,8 @@ export default function DiscreteSlider({
     return <span className="valueLabel">{savingsValue}</span>;
   }
 
+  setProjectedSavings(User.income * (savingsValue * 0.01))
+
   return (
     <Slider
       className="slider"

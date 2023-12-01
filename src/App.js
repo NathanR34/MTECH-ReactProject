@@ -55,9 +55,12 @@ export default function App() {
   const [historyArr, setHistoryArr] = useState([]);
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
   const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false);
-  const [projectedSavings, setProjectedSavings] = useState(null);
-  const [availableSpending, setAvailableSpending] = useState(null);
+  const [projectedSavings, setProjectedSavings] = useState(User.income * (30 * 0.01));
+  const [availableSpending, setAvailableSpending] = useState((User.income - projectedSavings) * 2);
+  const [moneySpent, setMoneySpent] = useState(0)
 
+
+  console.log(availableSpending)
   UseTime();
 
   const addTransaction = useCallback((newTran) => {
@@ -110,6 +113,8 @@ export default function App() {
                 addTransaction={addTransaction}
                 availableSpending={availableSpending}
                 setAvailableSpending={setAvailableSpending}
+                moneySpent = {moneySpent}
+                setMoneySpent ={setMoneySpent}
               />
             ) : null}
             {pageSelect === "budget" ? (
@@ -132,6 +137,7 @@ export default function App() {
               <ExpectedSavings
                 projectedSavings={projectedSavings}
                 availableSpending={availableSpending}
+                moneySpent = {moneySpent}
               />
             ) : null}
             {/* <DateTime /> */}

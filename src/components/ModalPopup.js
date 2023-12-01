@@ -11,12 +11,22 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-
+import { useState, useContext } from "react";
 import { User } from "../App";
+import { useMonthlyContext } from "../App";
+
 
 export default function ModalPopup({ setIsLoggedIn }) {
   const [open, setOpen] = React.useState(true);
-  const [missingOpen, setMissingOpen] = React.useState(false);
+  const [missingOpen, setMissingOpen] = useState(false);
+  const [incomeFrequencySelection, setIncomeFrequencySelection] = useState('bi-weekly');
+
+  
+
+  const {setMonthlyIncome} = useMonthlyContext();
+
+  let missingInfo = true;
+
   const handleMissing = () => {
     setMissingOpen(true);
   };
@@ -35,8 +45,15 @@ export default function ModalPopup({ setIsLoggedIn }) {
     User.cash = e.target.value;
   };
 
+  
+
+ 
+
   const addIncomeFrequency = (e) => {
     User.incomeFrequency = e.target.value;
+    console.log(e.target.value)
+    setIncomeFrequencySelection(e.target.value)
+   
   };
 
   const addIncome = (e) => {
@@ -46,23 +63,45 @@ export default function ModalPopup({ setIsLoggedIn }) {
   const addUser = (e) => {
     e.preventDefault();
     if (User.firstName === null || User.firstName === "") {
-      handleMissing();
+      missingInfo = true
+      setMissingOpen(true)
     }
-    if (User.cash === null || User.cash === "") {
-      handleMissing();
-    }
-    if (User.income === null || User.income === "") {
-      handleMissing();
-    }
+    else{
+      if (User.cash === null || User.cash === "") {
+        missingInfo = true
+        setMissingOpen(true)
+      }
+      else{
+        if (User.income === null || User.income === "") {
+          missingInfo = true
+          setMissingOpen(true)
+        }  
+        else{
 
-    setOpen(false);
-    setIsLoggedIn(true);
-    console.log(User);
+          if(User.incomeFrequency === 'bi-weekly'){
+            setMonthlyIncome((User.income) * 2)
+          }
+
+
+          missingInfo = false
+        }
+      }
+    }
+    
+
+
+    
+    if(missingInfo === false){
+      setOpen(false);
+      setIsLoggedIn(true);
+    }
+    
   };
+
+
   const handleClose = () => {
     setOpen(false);
   };
-  console.log("modal");
   return (
     <>
       <React.Fragment>
@@ -75,7 +114,7 @@ export default function ModalPopup({ setIsLoggedIn }) {
               autoFocus
               margin="dense"
               id="name"
-              label="name"
+              label="Name"
               type="text"
               fullWidth
               variant="standard"
@@ -100,13 +139,10 @@ export default function ModalPopup({ setIsLoggedIn }) {
               required
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={"income-frequency"}
-              label="income-frequency"
+              value={incomeFrequencySelection}
+              label={incomeFrequencySelection}
               onChange={addIncomeFrequency}
             >
-              <MenuItem value={"income-frequency"}>
-                Select Payment Frequency
-              </MenuItem>
               <MenuItem value={"bi-weekly"}>Bi-Weekly</MenuItem>
               <MenuItem value={"semi-monthly"}>Semi-Monthly</MenuItem>
               <MenuItem value={"weekly"}>Weekly</MenuItem>
