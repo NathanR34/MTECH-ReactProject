@@ -129,7 +129,7 @@ export default function NewTransaction({
         <div>
           <p>Select:</p>
           <div className="flex justify-around">
-            <label for="expenseCD"> Expense:</label>
+            <label htmlFor="expenseCD"> Expense:</label>
             <input
               type="checkbox"
               defaultChecked={true}
@@ -137,7 +137,7 @@ export default function NewTransaction({
               onClick={handleExpense}
             />
             &nbsp;&nbsp;
-            <label for="incomeCD"> Income</label>
+            <label htmlFor="incomeCD"> Income</label>
             <input
               type="checkbox"
               className="incomeCB"

@@ -46,9 +46,9 @@ export default function App() {
   const [historyArr, setHistoryArr] = useState([]);
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
   const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false);
-  const [projectedSavings, setProjectedSavings] = useState(null);
-  const [availableSpending, setAvailableSpending] = useState(null);
-
+  const [projectedSavings, setProjectedSavings] = useState(User.income * (30 * 0.01));
+  const [availableSpending, setAvailableSpending] = useState((User.income - projectedSavings) * 2);
+  console.log(availableSpending)
   UseTime();
 
   const addTransaction = useCallback((newTran) => {
