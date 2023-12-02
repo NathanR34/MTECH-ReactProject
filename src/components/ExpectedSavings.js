@@ -12,10 +12,22 @@ export default function ExpectedSavings({
   availableSpending,
   moneySpent
 }){
+  
 
-    const [savings, setSavings] = useState((User.income * 2 - (User.income * (30 * 0.01)) * 2) - moneySpent )
-    // console.log(moneySpent)
-    console.log((User.income * 2 - (User.income * (30 * 0.01)) * 2) - moneySpent)
+
+    let numberOfPaychecksMonthly = 2
+
+    if(User.incomeFrequency === 'weekly'){
+      numberOfPaychecksMonthly = 4
+    }
+
+    let incomeFrequencyCheck = 2
+    
+    if(User.incomeFrequency === 'weekly'){
+      incomeFrequencyCheck = 1
+    }
+
+    const [savings, setSavings] = useState((User.income * 2 - (User.income * (30 * 0.01)) * numberOfPaychecksMonthly) - moneySpent )
 
   return (
     <div className="mainPage">
@@ -25,13 +37,13 @@ export default function ExpectedSavings({
             <SavingsIcon color="success"></SavingsIcon>
             <div>
             {projectedSavings === 0 ? (
-            <div> Projected Savings This Month:{(User.income * (30 * 0.01)) * 2} </div>
-        ) : <div> Projected Savings This Month:{Math.floor(projectedSavings * 2)} </div>}
+            <div> Projected Savings This Month:{(User.income * (30 * 0.01)) * numberOfPaychecksMonthly} </div>
+        ) : <div> Projected Savings This Month:{Math.floor(projectedSavings * numberOfPaychecksMonthly)} </div>}
             </div>
             <div>
             {projectedSavings === 0 ? (
-            <div> Projected Savings This Week:{(User.income * (30 * 0.01))/ 2} </div>
-        ) : <div> Projected Savings This Week:{Math.floor(projectedSavings/2 )} </div>}
+            <div> Projected Savings This Week:{(User.income * (30 * 0.01))/ numberOfPaychecksMonthly } </div>
+        ) : <div> Projected Savings This Week:{Math.floor(projectedSavings/incomeFrequencyCheck )} </div>}
             </div>
           </CardContent>
         </Card>

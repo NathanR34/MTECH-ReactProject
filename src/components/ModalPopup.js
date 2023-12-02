@@ -27,9 +27,6 @@ export default function ModalPopup({ setIsLoggedIn }) {
 
   let missingInfo = true;
 
-  const handleMissing = () => {
-    setMissingOpen(true);
-  };
   const handleMissingClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -81,8 +78,12 @@ export default function ModalPopup({ setIsLoggedIn }) {
           if(User.incomeFrequency === 'bi-weekly'){
             setMonthlyIncome((User.income) * 2)
           }
-
-
+          if(User.incomeFrequency === 'semi-monthly'){
+            setMonthlyIncome((User.income) * 2)
+          }
+          if(User.incomeFrequency === 'weekly'){
+            setMonthlyIncome((User.income) * 4)
+          }
           missingInfo = false
         }
       }

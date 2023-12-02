@@ -28,14 +28,18 @@ export default function DiscreteSlider({
   projectedSavings,
 }) {
   const { savingsValue, setSavingsValue } = useSavings();
-  
+  let numberOfPaychecksMonthly = 2
+
+  if(User.incomeFrequency === 'weekly'){
+    numberOfPaychecksMonthly = 4
+  }
+
     useEffect(() => {
-        setAvailableSpending( (User.income - projectedSavings) * 2)
+        setAvailableSpending( (User.income - projectedSavings) * numberOfPaychecksMonthly)
     }, [projectedSavings, setAvailableSpending])
 
   const savingsHandler = (e) => {
     setSavingsValue(e.target.value);
-    // savingsValue = e.target.value + '%'
     setProjectedSavings(User.income * (e.target.value * 0.01));
   };
   function SliderValueLabel() {
