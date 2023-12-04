@@ -233,6 +233,16 @@ w-50 {
 .sliderContainer {
   width: 70%;
 }
+.paidContainer {
+  margin-top: 20px;
+}
+.paychecksContainer {
+  display: flex;
+  flex-direction: column;
+}
+.paycheck {
+  margin: 5px;
+}
 @media screen and (max-width: 1100px) {
   .top {
     flex-direction: column;
@@ -250,6 +260,10 @@ w-50 {
   }
   .sliderContainer {
     width: 100%;
+  }
+  .paidContainer {
+    display: flex;
+    flex-direction: column;
   }
 }
 @media screen and (max-width: 768px) {
