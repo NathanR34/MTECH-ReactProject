@@ -36,6 +36,7 @@ export default function DiscreteSlider({
 
     useEffect(() => {
         setAvailableSpending( (User.income - projectedSavings) * numberOfPaychecksMonthly)
+        setProjectedSavings(User.income * (savingsValue * 0.01));
     }, [projectedSavings, setAvailableSpending])
 
   const savingsHandler = (e) => {
@@ -46,7 +47,6 @@ export default function DiscreteSlider({
     return <span className="valueLabel">{savingsValue}</span>;
   }
 
-  setProjectedSavings(User.income * (savingsValue * 0.01))
 
   return (
     <Slider
