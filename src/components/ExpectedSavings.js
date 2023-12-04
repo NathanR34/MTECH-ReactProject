@@ -61,29 +61,28 @@ export default function ExpectedSavings({
       <Paper className="savingsPaper" sx={{ bgcolor: grey[50] }} elevation={5}>
         <Card className="savings">
           <CardContent>
-            <Typography variant="h5">
-              {" "}
+            <Typography className="spendingTop" variant="h6">
               <SavingsIcon color="success"></SavingsIcon>
               Projected Savings
             </Typography>
             <div>
               {projectedSavings === 0 ? (
-                <div> Projected Savings This Month:{savings} </div>
+                <div> This Month:{savings} </div>
               ) : (
                 <div>
                   {" "}
-                  Projected Savings This Month:
+                  This Month:
                   {Math.floor(projectedSavings * numberOfPaychecksMonthly)}{" "}
                 </div>
               )}
             </div>
             <div>
               {projectedSavings === 0 ? (
-                <div> Projected Savings This Week:{weeklySavings} </div>
+                <div> This Week:{weeklySavings} </div>
               ) : (
                 <div>
                   {" "}
-                  Projected Savings This Week:
+                  This Week:
                   {Math.floor(projectedSavings / incomeFrequencyCheck)}{" "}
                 </div>
               )}
@@ -92,29 +91,28 @@ export default function ExpectedSavings({
         </Card>
         <Card className="spending">
           <CardContent>
-            <Typography variant="h5">
+            <Typography className="spendingTop" variant="h6">
               <MoneyIcon color="success"></MoneyIcon>
               Spending Left
             </Typography>
             <div>
               {availableSpending === 0 ? (
-                <div> Spending Left For This Month: {availableSpending} </div>
+                <div>This Month: {availableSpending} </div>
               ) : (
                 <div>
                   {" "}
-                  Spending Left For This Month:{" "}
-                  {Math.floor(availableSpending - moneySpent)}{" "}
+                  This Month: {Math.floor(availableSpending - moneySpent)}{" "}
                 </div>
               )}
             </div>
             <div>
               {availableSpending === 0 ? (
-                <div> Spening Left For This Week: {weeklySpending} </div>
+                <div> This Week: {weeklySpending} </div>
               ) : (
                 <div>
                   {" "}
-                  Spening Left For This Week:{" "}
-                  {Math.floor(availableSpending / 4) - moneySpent}{" "}
+                  This Week: {Math.floor(availableSpending / 4) -
+                    moneySpent}{" "}
                 </div>
               )}
             </div>

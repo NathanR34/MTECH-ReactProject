@@ -49,6 +49,25 @@ body,
   flex-direction: column;
   align-items: center;
 }
+.historyList {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  top: -20px;
+}
+.hListItem {
+  height: 55px;
+  padding: 0;
+  margin: -5px;
+  display: flex;
+  align-items: center;
+}
+.historyCard {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 7px;
+}
 .savingsPaper {
   width: 45%;
   display: flex;
@@ -95,6 +114,7 @@ body,
   overflow: hidden;
   padding: 10px;
 }
+
 .budget-container {
   width: 50%;
   height: min-content;
@@ -190,20 +210,28 @@ w-50 {
 .ml-5 {
   margin-left: 20px;
 }
+.spendingTop {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
 .savings {
   border: 1px solid green;
   margin: 10px;
-  width: 47%;
+  width: 45%;
 }
 .spending {
   border: 1px solid red;
   margin: 10px;
   margin-right: 0;
-  width: 47%;
+  width: 45%;
 }
 .headingCenter {
   display: flex;
   align-items: center;
+}
+.sliderContainer {
+  width: 70%;
 }
 @media screen and (max-width: 1100px) {
   .top {
@@ -212,6 +240,16 @@ w-50 {
   .balance {
     top: 0;
     right: 0;
+  }
+  .savings {
+    width: 45%;
+    display: flex;
+  }
+  .spending {
+    width: 45%;
+  }
+  .sliderContainer {
+    width: 100%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -247,9 +285,6 @@ w-50 {
   }
   .budget-container {
     width: 90%;
-  }
-  .sliderContainer {
-    width: 100%;
   }
   .paidContainer {
     flex-flow: column nowrap;
