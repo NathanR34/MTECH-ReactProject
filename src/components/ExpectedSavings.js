@@ -6,60 +6,97 @@ import { grey } from "@mui/material/colors";
 import MoneyIcon from "@mui/icons-material/Payments";
 import SavingsIcon from "@mui/icons-material/Savings";
 import { useState } from "react";
+import Typography from "@mui/material/Typography";
 
 export default function ExpectedSavings({
   projectedSavings,
   availableSpending,
-  moneySpent
-}){
-  
+  moneySpent,
+}) {
+  let numberOfPaychecksMonthly = 2;
 
+  if (User.incomeFrequency === "weekly") {
+    numberOfPaychecksMonthly = 4;
+  }
 
-    let numberOfPaychecksMonthly = 2
+  let incomeFrequencyCheck = 2;
 
-    if(User.incomeFrequency === 'weekly'){
-      numberOfPaychecksMonthly = 4
-    }
+  if (User.incomeFrequency === "weekly") {
+    incomeFrequencyCheck = 1;
+  }
 
-    let incomeFrequencyCheck = 2
-    
-    if(User.incomeFrequency === 'weekly'){
-      incomeFrequencyCheck = 1
-    }
-
-    const [savings, setSavings] = useState((User.income * 2 - (User.income * (30 * 0.01)) * numberOfPaychecksMonthly) - moneySpent )
+  const [savings, setSavings] = useState(
+    User.income * 2 -
+      User.income * (30 * 0.01) * numberOfPaychecksMonthly -
+      moneySpent
+  );
 
   return (
     <div className="mainPage">
       <Paper className="savingsPaper" sx={{ bgcolor: grey[50] }} elevation={5}>
         <Card className="savings">
           <CardContent>
-            <SavingsIcon color="success"></SavingsIcon>
+            <Typography variant="h5">
+              {" "}
+              <SavingsIcon color="success"></SavingsIcon>
+              Projected Savings
+            </Typography>
             <div>
-            {projectedSavings === 0 ? (
-            <div> Projected Savings This Month:{(User.income * (30 * 0.01)) * numberOfPaychecksMonthly} </div>
-        ) : <div> Projected Savings This Month:{Math.floor(projectedSavings * numberOfPaychecksMonthly)} </div>}
+              {projectedSavings === 0 ? (
+                <div>
+                  This Month:
+                  {User.income * (30 * 0.01) * numberOfPaychecksMonthly}
+                </div>
+              ) : (
+                <div>
+                  This Month:
+                  {Math.floor(projectedSavings * numberOfPaychecksMonthly)}
+                </div>
+              )}
             </div>
             <div>
-            {projectedSavings === 0 ? (
-            <div> Projected Savings This Week:{(User.income * (30 * 0.01))/ numberOfPaychecksMonthly } </div>
-        ) : <div> Projected Savings This Week:{Math.floor(projectedSavings/incomeFrequencyCheck )} </div>}
+              {projectedSavings === 0 ? (
+                <div>
+                  This Week:
+                  {(User.income * (30 * 0.01)) / numberOfPaychecksMonthly}
+                </div>
+              ) : (
+                <div>
+                  This Week:
+                  {Math.floor(projectedSavings / incomeFrequencyCheck)}
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
         <Card className="spending">
           <CardContent>
-            <MoneyIcon color="success"></MoneyIcon>
+            <Typography variant="h5">
+              <MoneyIcon color="success"></MoneyIcon>
+              Spending Left
+            </Typography>
             <div>
-              {" "}
               {availableSpending === 0 ? (
-            <div> Spending Left For This Month: {savings} </div>
-        ) : <div> Spending Left For This Month: {Math.floor(availableSpending - moneySpent)} </div> }
+                <div> This Month: {savings} </div>
+              ) : (
+                <div>
+                  This Month:
+                  {Math.floor(availableSpending - moneySpent)}
+                </div>
+              )}
             </div>
             <div>
-            {availableSpending === 0 ? (
-            <div> Spening Left For This Week: {(User.income - (User.income * (30 * 0.01))) / 2} </div>
-        ): <div> Spening Left For This Week: {Math.floor((availableSpending/4)) - moneySpent} </div> }
+              {availableSpending === 0 ? (
+                <div>
+                  This Week:
+                  {(User.income - User.income * (30 * 0.01)) / 2}
+                </div>
+              ) : (
+                <div>
+                  This Week:
+                  {Math.floor(availableSpending / 4) - moneySpent}
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

@@ -229,7 +229,7 @@ export default function SimpleDialogDemo({ setPageSelect }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Budget", "Overview"].map((text, index) => (
+          {["home", "budget", "overview"].map((text, index) => (
             <ListItem key={text} disablePadding>
               <Button
                 color="inherit"
