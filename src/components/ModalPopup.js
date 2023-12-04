@@ -13,17 +13,16 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useState, useContext } from "react";
 import { User } from "../App";
+import { emails } from "./NavBar";
 import { useMonthlyContext } from "../App";
-
 
 export default function ModalPopup({ setIsLoggedIn }) {
   const [open, setOpen] = React.useState(true);
   const [missingOpen, setMissingOpen] = useState(false);
-  const [incomeFrequencySelection, setIncomeFrequencySelection] = useState('bi-weekly');
+  const [incomeFrequencySelection, setIncomeFrequencySelection] =
+    useState("bi-weekly");
 
-  
-
-  const {setMonthlyIncome} = useMonthlyContext();
+  const { setMonthlyIncome } = useMonthlyContext();
 
   let missingInfo = true;
 
@@ -42,15 +41,10 @@ export default function ModalPopup({ setIsLoggedIn }) {
     User.cash = e.target.value;
   };
 
-  
-
- 
-
   const addIncomeFrequency = (e) => {
     User.incomeFrequency = e.target.value;
-    console.log(e.target.value)
-    setIncomeFrequencySelection(e.target.value)
-   
+    console.log(e.target.value);
+    setIncomeFrequencySelection(e.target.value);
   };
 
   const addIncome = (e) => {
@@ -59,46 +53,39 @@ export default function ModalPopup({ setIsLoggedIn }) {
 
   const addUser = (e) => {
     e.preventDefault();
-    if (User.firstName === null || User.firstName === "") {
-      missingInfo = true
-      setMissingOpen(true)
-    }
-    else{
-      if (User.cash === null || User.cash === "") {
-        missingInfo = true
-        setMissingOpen(true)
-      }
-      else{
-        if (User.income === null || User.income === "") {
-          missingInfo = true
-          setMissingOpen(true)
-        }  
-        else{
 
-          if(User.incomeFrequency === 'bi-weekly'){
-            setMonthlyIncome((User.income) * 2)
+    emails.push(User.firstName);
+    if (User.firstName === null || User.firstName === "") {
+      missingInfo = true;
+      setMissingOpen(true);
+    } else {
+      if (User.cash === null || User.cash === "") {
+        missingInfo = true;
+        setMissingOpen(true);
+      } else {
+        if (User.income === null || User.income === "") {
+          missingInfo = true;
+          setMissingOpen(true);
+        } else {
+          if (User.incomeFrequency === "bi-weekly") {
+            setMonthlyIncome(User.income * 2);
           }
-          if(User.incomeFrequency === 'semi-monthly'){
-            setMonthlyIncome((User.income) * 2)
+          if (User.incomeFrequency === "semi-monthly") {
+            setMonthlyIncome(User.income * 2);
           }
-          if(User.incomeFrequency === 'weekly'){
-            setMonthlyIncome((User.income) * 4)
+          if (User.incomeFrequency === "weekly") {
+            setMonthlyIncome(User.income * 4);
           }
-          missingInfo = false
+          missingInfo = false;
         }
       }
     }
-    
 
-
-    
-    if(missingInfo === false){
+    if (missingInfo === false) {
       setOpen(false);
       setIsLoggedIn(true);
     }
-    
   };
-
 
   const handleClose = () => {
     setOpen(false);
