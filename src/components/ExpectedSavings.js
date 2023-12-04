@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import { grey } from "@mui/material/colors";
 import MoneyIcon from "@mui/icons-material/Payments";
 import SavingsIcon from "@mui/icons-material/Savings";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 
 export default function ExpectedSavings({
@@ -25,11 +25,36 @@ export default function ExpectedSavings({
     incomeFrequencyCheck = 1;
   }
 
-  const [savings, setSavings] = useState(
-    User.income * 2 -
-      User.income * (30 * 0.01) * numberOfPaychecksMonthly -
-      moneySpent
-  );
+  const [savings, setSavings] = useState(null);
+
+  if (savings === null) {
+    setSavings(
+      Math.floor(
+        User.income * numberOfPaychecksMonthly -
+          User.income * (70 * 0.01) * numberOfPaychecksMonthly -
+          moneySpent
+      )
+    );
+  }
+
+  const [weeklySavings, setWeeklySavings] = useState(null);
+
+  if (weeklySavings === null) {
+    setWeeklySavings((User.income * (30 * 0.01)) / incomeFrequencyCheck);
+  }
+
+  console.log(User.income * (30 * 0.01) * numberOfPaychecksMonthly);
+
+  const [weeklySpending, setWeeklySpending] = useState(null);
+
+  if (weeklySpending === null) {
+    setWeeklySpending(Math.floor(availableSpending) - moneySpent);
+  }
+
+  useEffect(() => {
+    console.log(availableSpending);
+    console.log("weekly", weeklySpending);
+  }, [weeklySpending]);
 
   return (
     <div className="mainPage">
@@ -43,27 +68,23 @@ export default function ExpectedSavings({
             </Typography>
             <div>
               {projectedSavings === 0 ? (
-                <div>
-                  This Month:
-                  {User.income * (30 * 0.01) * numberOfPaychecksMonthly}
-                </div>
+                <div> Projected Savings This Month:{savings} </div>
               ) : (
                 <div>
-                  This Month:
-                  {Math.floor(projectedSavings * numberOfPaychecksMonthly)}
+                  {" "}
+                  Projected Savings This Month:
+                  {Math.floor(projectedSavings * numberOfPaychecksMonthly)}{" "}
                 </div>
               )}
             </div>
             <div>
               {projectedSavings === 0 ? (
-                <div>
-                  This Week:
-                  {(User.income * (30 * 0.01)) / numberOfPaychecksMonthly}
-                </div>
+                <div> Projected Savings This Week:{weeklySavings} </div>
               ) : (
                 <div>
-                  This Week:
-                  {Math.floor(projectedSavings / incomeFrequencyCheck)}
+                  {" "}
+                  Projected Savings This Week:
+                  {Math.floor(projectedSavings / incomeFrequencyCheck)}{" "}
                 </div>
               )}
             </div>
@@ -77,24 +98,23 @@ export default function ExpectedSavings({
             </Typography>
             <div>
               {availableSpending === 0 ? (
-                <div> This Month: {savings} </div>
+                <div> Spending Left For This Month: {availableSpending} </div>
               ) : (
                 <div>
-                  This Month:
-                  {Math.floor(availableSpending - moneySpent)}
+                  {" "}
+                  Spending Left For This Month:{" "}
+                  {Math.floor(availableSpending - moneySpent)}{" "}
                 </div>
               )}
             </div>
             <div>
               {availableSpending === 0 ? (
-                <div>
-                  This Week:
-                  {(User.income - User.income * (30 * 0.01)) / 2}
-                </div>
+                <div> Spening Left For This Week: {weeklySpending} </div>
               ) : (
                 <div>
-                  This Week:
-                  {Math.floor(availableSpending / 4) - moneySpent}
+                  {" "}
+                  Spening Left For This Week:{" "}
+                  {Math.floor(availableSpending / 4) - moneySpent}{" "}
                 </div>
               )}
             </div>
