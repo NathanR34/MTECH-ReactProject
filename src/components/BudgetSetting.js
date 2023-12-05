@@ -46,6 +46,12 @@ const BudgetPage = ({
     } else setUpcomingPaycheck(false);
   };
 
+  if(upcomingPaycheck === true){
+    
+  }
+
+
+
   let firstPaycheckDate = "";
 
   const semiMonthlyFirstPaycheckHandler = (e) => {
