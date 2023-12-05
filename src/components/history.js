@@ -12,10 +12,10 @@ export default function History({ historyArr }) {
       <h2>History:</h2>
       <List className="historyList">
         {historyOverview.map((tran, index) => (
-          <ListItem className="flex-col hListItem" component="div">
-            <Card className="historyCard">
-              <CardContent>
-                <ListItemText key={index} className={tran.type}>
+          <ListItem key={index} className="flex-col hListItem" component="div">
+            <Card key={index * 2} className="historyCard">
+              <CardContent key={index * 3} >
+                <ListItemText key={index * 4} className={tran.type}>
                   {" "}
                   {tran.title}: {addCommaToNumbers(tran.amount)} {tran.date}
                 </ListItemText>
