@@ -23,7 +23,8 @@ export default function ExpenseTracker({
   } = useMonthlyContext();
 
   const addCommaToNumbers = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    x = Math.floor(x);
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (x%1).toFixed(2).toString().slice(1);
   };
 
   if (loggedIn) {
@@ -39,7 +40,7 @@ export default function ExpenseTracker({
               <h1> Welcome {User.firstName} </h1>
               <Card className="balance flex" variant="outlined">
                 <h3>YOUR BALANCE</h3>
-                <h2>&#36;{addCommaToNumbers(User.cash)}.00</h2>
+                <h2>&#36;{addCommaToNumbers(User.cash)}</h2>
               </Card>
             </div>
             <div className="row income-expense-container">
@@ -51,7 +52,7 @@ export default function ExpenseTracker({
               </Card>
               <Card className="incomeExpense flex" variant="outlined">
                 <h4>Expense</h4>
-                <p className="red"> -$ &nbsp; {monthlyExpenses}</p>
+                <p className="red"> -$ &nbsp; {addCommaToNumbers(monthlyExpenses)}</p>
               </Card>
             </div>
             <div className="row">
