@@ -33,8 +33,13 @@ body,
   flex-flow: row-reverse wrap;
   justify-content: space-around;
 }
+.wholeContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .expensePaper {
-  width: 45%;
+  width: 50%;
   height: max-content;
   min-width: fit-content;
   padding: 0;
@@ -44,12 +49,32 @@ body,
   flex-direction: column;
   align-items: center;
 }
+.historyList {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  top: -20px;
+}
+.hListItem {
+  height: 55px;
+  padding: 0;
+  margin: -5px;
+  display: flex;
+  align-items: center;
+}
+.historyCard {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 7px;
+}
 .savingsPaper {
   width: 45%;
   display: flex;
-  height: 250px;
+  min-height: fit-content;
   min-width: fit-content;
   padding: 10px;
+  flex-wrap: wrap;
 }
 .historyPaper {
   width: 40%;
@@ -59,10 +84,13 @@ body,
   min-height: 180px;
   overflow: hidden;
 }
+.income-expense-container {
+  width: 90%;
+}
 .incomeExpense {
   display: flex;
   flex-flow: column nowrap;
-  width: 250px;
+  width: 100%;
   align-items: center;
   height: fit-content;
 }
@@ -86,6 +114,7 @@ body,
   overflow: hidden;
   padding: 10px;
 }
+
 .budget-container {
   width: 50%;
   height: min-content;
@@ -164,17 +193,7 @@ w-50 {
   margin-bottom: 15px;
   margin-top: 10px;
 }
-@media screen and (max-width: 1000px) {
-  .balance {
-    padding: 5px;
-    top: 0;
-    right: 0;
-  }
-  .top {
-    flex-flow: column;
-    align-content: center;
-  }
-}
+
 .w-60 {
   width: 60%;
 }
@@ -191,13 +210,122 @@ w-50 {
 .ml-5 {
   margin-left: 20px;
 }
+.spendingTop {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
 .savings {
   border: 1px solid green;
-  margin: 5px;
-  width: 50%;
+  margin: 10px;
+  width: 45%;
 }
 .spending {
   border: 1px solid red;
+  margin: 10px;
+  margin-right: 0;
+  width: 45%;
+}
+.headingCenter {
+  display: flex;
+  align-items: center;
+}
+.sliderContainer {
+  width: 70%;
+}
+.paidContainer {
+  margin-top: 20px;
+}
+.paychecksContainer {
+  display: flex;
+  flex-direction: column;
+}
+.paycheck {
   margin: 5px;
-  width: 50%;
+}
+@media screen and (max-width: 1100px) {
+  .top {
+    flex-direction: column;
+  }
+  .balance {
+    top: 0;
+    right: 0;
+  }
+  .savings {
+    width: 45%;
+    display: flex;
+  }
+  .spending {
+    width: 45%;
+  }
+  .sliderContainer {
+    width: 100%;
+  }
+  .paidContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 768px) {
+  .top {
+    flex-flow: column;
+    align-content: center;
+  }
+  .savingsPaper {
+    width: 50%;
+    flex-flow: column nowrap;
+  }
+  .savings {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .spending {
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .mainPage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .wholeContainer {
+    width: 85%;
+    margin: 0;
+    padding: 5px;
+  }
+  .budget-container {
+    width: 90%;
+  }
+  .paidContainer {
+    flex-flow: column nowrap;
+  }
+  .expensePaper {
+    width: 20%;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .incomeExpense {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 125px;
+    align-items: center;
+    height: fit-content;
+  }
+  .new-transaction {
+    width: 100%;
+  }
+  .historyPaper {
+    width: 20%;
+    position: relative;
+    margin: 25px;
+    min-height: 100px;
+  }
 }

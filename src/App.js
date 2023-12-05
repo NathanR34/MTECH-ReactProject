@@ -15,6 +15,8 @@ import { UseTime } from "./util/time";
 import { getDate } from "./util/time";
 import ExpectedSavings from "./components/ExpectedSavings";
 import { SavingsProvider } from "./components/Slider";
+import DiscreteSlider from './components/Slider'
+
 
 export const User = {
   firstName: null,
@@ -59,8 +61,12 @@ export default function App() {
   const [availableSpending, setAvailableSpending] = useState((User.income - projectedSavings) * 2);
   const [moneySpent, setMoneySpent] = useState(0)
 
-
-  console.log(availableSpending)
+  // if(projectedSavings === null) {
+  //   setProjectedSavings(User.income * (30 * 0.01))
+  // }
+  useEffect(() => {
+    console.log('income', User.income, 'projected savings', projectedSavings)
+  })
   UseTime();
 
   const addTransaction = useCallback((newTran) => {

@@ -1,5 +1,5 @@
-import {User} from '../App'
-import DiscreteSlider from './Slider';
+import { User } from "../App";
+import DiscreteSlider from "./Slider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Paper from "@mui/material/Paper";
@@ -83,35 +83,44 @@ const BudgetPage = ({
         <div className="budget-container">
           <Typography variant="h5">Personalize Your Budget Here</Typography>
           {User.incomeFrequency === "bi-weekly" ? (
-            <div className="row-flex">
+            <div className="row-flex paidContainer">
               <p>When did you last get paid: </p>
-              <input
-                key="calander-input"
-                onSelect={paycheckSelection}
-                type="date"
-                max={todaysDate}
-              />
+              <span className="paycheck">
+                <input
+                  key="calander-input"
+                  onSelect={paycheckSelection}
+                  type="date"
+                  max={todaysDate}
+                />
+              </span>
             </div>
           ) : null}
           {User.incomeFrequency === "semi-monthly" ? (
-            <div>
+            <div className="paidContainer row-flex ">
               <p>When do you get paid?</p>
-              <div>
-                <label>First Paycheck</label>
-                <input onSelect={semiMonthlyFirstPaycheckHandler} type="date" />
-                <label>Second Paycheck</label>
-                <input
-                  onSelect={semiMonthlySecondPaycheckHandler}
-                  key="calander-input"
-                  type="date"
-                />
+              <div className="paychecksContainer">
+                <span className="paycheck">
+                  <label>First Paycheck</label>
+                  <input
+                    onSelect={semiMonthlyFirstPaycheckHandler}
+                    type="date"
+                  />
+                </span>
+                <span className="paycheck">
+                  <label>Second Paycheck</label>
+                  <input
+                    onSelect={semiMonthlySecondPaycheckHandler}
+                    key="calander-input"
+                    type="date"
+                  />
+                </span>
               </div>
             </div>
           ) : null}
           {upcomingPaycheck === true ? (
             <div>Upcoming Paycheck {User.income}</div>
           ) : null}
-          <Card className="center" variant="outlined">
+          <Card className="center sliderContainer" variant="outlined">
             <CardContent>
               <Typography sx={{ fontSize: 18 }} gutterBottom>
                 What pertage of your income would you like to save?
