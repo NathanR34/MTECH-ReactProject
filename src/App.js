@@ -16,7 +16,7 @@ import { getDate } from "./util/time";
 import ExpectedSavings from "./components/ExpectedSavings";
 import { SavingsProvider } from "./components/Slider";
 import DiscreteSlider from './components/Slider'
-
+import FullHistory from "./components/canvas/FullHistory";
 
 export const User = {
   firstName: null,
@@ -140,11 +140,20 @@ export default function App() {
             ) : null}
             {}
             {pageSelect === "overview" ? (
-              <ExpectedSavings
-                projectedSavings={projectedSavings}
-                availableSpending={availableSpending}
-                moneySpent = {moneySpent}
-              />
+              <>
+                <ExpectedSavings
+                  projectedSavings={projectedSavings}
+                  availableSpending={availableSpending}
+                  moneySpent = {moneySpent}
+                />
+                {/* <div className="full-history-container">                
+                  <FullHistory
+                    historyArr={historyArr}
+                  />
+                </div> */}
+
+              </>
+
             ) : null}
             {/* <DateTime /> */}
           </div>
