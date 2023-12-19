@@ -22,6 +22,11 @@ export function Global({children}){
         }
     }
 
+    let names = [];
+    for(let name in users){
+        names.push(name);
+    }
+
     const global = {
         user: {
             set: setUser,
@@ -32,7 +37,8 @@ export function Global({children}){
                     return {cred: user.cred, status: user.status};
                 }
                 return null;
-            }
+            },
+            names: names
         }
     };
     
