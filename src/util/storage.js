@@ -156,16 +156,64 @@ class LocalStorageInterfaceRoot extends StorageInterfaceRoot {
     }
 }
 
+/*function readOnly(file){
+    return {
+        get(name){
+            file = file.get();
+        },
+        load(){
+            return file.load();
+        }
+    }
+}*/
+
 const credStorage = new LocalStorageInterfaceRoot("budget-app/cred-data").getBase();
 
 function verifyName(name){
     if(name){
-        if(name[name.length] !== "/"){
+        if(name[name.length-1] !== "/"){
             return name + "/";
         }
         return name;
     }
     return "";
+}
+
+function verifyCred(cred, access){
+    let credType = typeof(cred);
+    let accessType = typeof(access);
+    switch(accessType){
+        case "string":
+            access = {password: access};
+            break;
+        case "object":
+            if(!access) return false;
+            break;
+        default:
+            return false;
+    }
+    switch(credType){
+        case "string":
+            if(!cred) return true;
+            return (access.password === cred);
+        case "object":
+            if(!cred) return false;
+            break;
+        default:
+            return false;
+    }
+    if("open" in cred) return true;
+    let success = 0;
+    let total = 0;
+    if("password" in cred){
+        total++;
+        if(access.password === cred.password) success++;
+    }
+    if("name" in cred){
+        total++;
+        if(cred.name === access.name) success++;
+    }
+    return total<=success;
 }
 
 function getCredStorage(name, cred){
@@ -174,7 +222,7 @@ function getCredStorage(name, cred){
     let credFile = file.get("cred");
     let storageCred = credFile.load();
 
-    if(storageCred !== "" && storageCred !== null && storageCred !== cred) return null;
+    if(!verifyCred(storageCred, cred)) return null;
 
     if(storageCred === null) return undefined;
     
@@ -188,17 +236,19 @@ function createCredStorage(name, cred){
     let storageCred = credFile.load();
     if(storageCred || storageCred === "") return false;
     credFile.save(cred);
-    file.extendDomain().get("data").save("");
+    file = file.extendDomain()
+    file.get("data").save("");
+    file.get("public/data").save("");
     return true;
 }
 
-function deleteCredStorage(name){
+/*function deleteCredStorage(name){
     name = verifyName(name);
     let file = credStorage.get(name);
     let credFile = file.get("cred");
     credFile.delete();
     file.extendDomain().get("data").delete();
-}
+}*/
 
 function hasStorage(name){
     name = verifyName(name);
@@ -208,15 +258,36 @@ function hasStorage(name){
     return hasData;
 }
 
-const storage = {
+function accessType(name){
+    name = verifyName(name);
+    let file = credStorage.get(name);
+    let credFile = file.get("cred");
+    let cred = credFile.load();
+    if(cred === "") return "open";
+    if(cred) return "password";
+    return "none";
+}
+function getPublicStorage(name){
+    name = verifyName(name);
+    let file = credStorage.get(name);
+    return file.get("public/").extendDomain().get("data");
+}
+
+const storageInterface = {
+    // protected
     cred: {
         get: getCredStorage,
         create: createCredStorage,
-        has: hasStorage
+        has: hasStorage,
+        accessType: accessType
+    },
+    // read only
+    access: {
+        get: getPublicStorage
     }
 };
 
-Object.freeze(storage);
-Object.freeze(storage.cred);
+Object.freeze(storageInterface);
+Object.freeze(storageInterface.cred);
 
-export default storage;
+export default storageInterface;
