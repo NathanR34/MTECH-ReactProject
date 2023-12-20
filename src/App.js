@@ -15,10 +15,12 @@ import { UseTime } from "./util/time";
 import { getDate } from "./util/time";
 import ExpectedSavings from "./components/ExpectedSavings";
 import { SavingsProvider } from "./components/Slider";
-import DiscreteSlider from './components/Slider'
-import FullHistory from "./components/canvas/FullHistory";
+//import DiscreteSlider from './components/Slider'
+//import FullHistory from "./components/canvas/FullHistory";
+import { Global } from "./util/Global";
+import { User, Profile } from "./util/User";
 
-export const User = {
+export const UserInfo = {
   firstName: null,
   cash: null,
   incomeFrequency: "bi-weekly",
@@ -57,16 +59,17 @@ export default function App() {
   const [historyArr, setHistoryArr] = useState([]);
   const [upcomingPaycheck, setUpcomingPaycheck] = useState(false);
   const [nextPaycheckDayObj, setNextPaycheckDay] = useState(false);
-  const [projectedSavings, setProjectedSavings] = useState(User.income * (30 * 0.01));
-  const [availableSpending, setAvailableSpending] = useState((User.income - projectedSavings) * 2);
+  const [projectedSavings, setProjectedSavings] = useState(UserInfo.income * (30 * 0.01));
+  const [savingsRatio, setSavingsRatio] = useState(0.3);
+  const [availableSpending, setAvailableSpending] = useState((UserInfo.income - projectedSavings) * 2);
   const [moneySpent, setMoneySpent] = useState(0)
 
   // if(projectedSavings === null) {
   //   setProjectedSavings(User.income * (30 * 0.01))
   // }
-  useEffect(() => {
-    console.log('income', User.income, 'projected savings', projectedSavings)
-  })
+  // useEffect(() => {
+  //   console.log('income', UserInfo.income, 'projected savings', projectedSavings)
+  // })
   UseTime();
 
   const addTransaction = useCallback((newTran) => {
@@ -81,10 +84,10 @@ export default function App() {
         if (updatingDate.second === 23) {
           const newTran = {
             title: "Paycheck",
-            amount: User.income,
+            amount: UserInfo.income,
             date: getDate(),
           };
-          User.cash = Number(User.cash) + Number(newTran.amount);
+          UserInfo.cash = Number(UserInfo.cash) + Number(newTran.amount);
           addTransaction(newTran);
           setUpcomingPaycheck(false);
         }
@@ -100,65 +103,74 @@ export default function App() {
   }, [updatingDate, addTransaction, nextPaycheckDayObj, upcomingPaycheck]);
 
   return (
-    <SavingsProvider>
-      <MonthlyContextProvider>
-        <div className="App">
-          <NavBar setPageSelect={setPageSelect} />
-          <div className="mainContent">
-            <ModalPopup
-              displayModal={modalDisplay}
-              setDisplayModal={setModalDisplay}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-            {pageSelect === "home" ? (
-              <ExpenseTracker
-                key="expensetracker"
-                loggedIn={isLoggedIn}
-                setLogIn={setIsLoggedIn}
-                historyArr={historyArr}
-                addTransaction={addTransaction}
-                availableSpending={availableSpending}
-                setAvailableSpending={setAvailableSpending}
-                moneySpent = {moneySpent}
-                setMoneySpent ={setMoneySpent}
-              />
-            ) : null}
-            {pageSelect === "budget" ? (
-              <BudgetPage
-                key="budgetpage"
-                loggedIn={isLoggedIn}
-                addTransaction={addTransaction}
-                UseTime={UseTime}
-                upcomingPaycheck={upcomingPaycheck}
-                setUpcomingPaycheck={setUpcomingPaycheck}
-                nextPaycheckDayObj={nextPaycheckDayObj}
-                setNextPaycheckDay={setNextPaycheckDay}
-                setProjectedSavings={setProjectedSavings}
-                projectedSavings={projectedSavings}
-                setAvailableSpending={setAvailableSpending}
-              />
-            ) : null}
-            {}
-            {pageSelect === "overview" ? (
-              <>
-                <ExpectedSavings
-                  projectedSavings={projectedSavings}
-                  availableSpending={availableSpending}
-                  moneySpent = {moneySpent}
-                />
-                {/* <div className="full-history-container">                
-                  <FullHistory
-                    historyArr={historyArr}
+    <Global>
+      <User>
+        <Profile>
+          <SavingsProvider>
+            <MonthlyContextProvider>
+              <div className="App">
+                <NavBar setPageSelect={setPageSelect} />
+                <div className="mainContent">
+                  <ModalPopup
+                    displayModal={modalDisplay}
+                    setDisplayModal={setModalDisplay}
+                    setIsLoggedIn={setIsLoggedIn}
                   />
-                </div> */}
+                  {pageSelect === "home" ? (
+                    <ExpenseTracker
+                      key="expensetracker"
+                      loggedIn={isLoggedIn}
+                      setLogIn={setIsLoggedIn}
+                      historyArr={historyArr}
+                      addTransaction={addTransaction}
+                      availableSpending={availableSpending}
+                      setAvailableSpending={setAvailableSpending}
+                      moneySpent = {moneySpent}
+                      setMoneySpent ={setMoneySpent}
+                    />
+                  ) : null}
+                  {pageSelect === "budget" ? (
+                    <BudgetPage
+                      key="budgetpage"
+                      loggedIn={isLoggedIn}
+                      addTransaction={addTransaction}
+                      UseTime={UseTime}
+                      upcomingPaycheck={upcomingPaycheck}
+                      setUpcomingPaycheck={setUpcomingPaycheck}
+                      nextPaycheckDayObj={nextPaycheckDayObj}
+                      setNextPaycheckDay={setNextPaycheckDay}
+                      setProjectedSavings={setProjectedSavings}
+                      setSavingsRatio={setSavingsRatio}
+                      projectedSavings={projectedSavings}
+                      setAvailableSpending={setAvailableSpending}
+                    />
+                  ) : null}
+                  {}
+                  {pageSelect === "overview" ? (
+                    <>
+                      <ExpectedSavings
+                        projectedSavings={projectedSavings}
+                        availableSpending={availableSpending}
+                        moneySpent = {moneySpent}
+                        historyArr = {historyArr}
+                        savingsRatio = {savingsRatio}
+                      />
+                      {/* <div className="full-history-container">                
+                        <FullHistory
+                          historyArr={historyArr}
+                        />
+                      </div> */}
 
-              </>
+                    </>
 
-            ) : null}
-            {/* <DateTime /> */}
-          </div>
-        </div>
-      </MonthlyContextProvider>
-    </SavingsProvider>
+                  ) : null}
+                  {/* <DateTime /> */}
+                </div>
+              </div>
+            </MonthlyContextProvider>
+          </SavingsProvider>
+        </Profile>
+      </User>
+    </Global>
   );
 }

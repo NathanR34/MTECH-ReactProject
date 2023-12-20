@@ -1,4 +1,4 @@
-import { User } from "../App";
+import { UserInfo } from "../App";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { purple } from "@mui/material/colors";
@@ -76,16 +76,17 @@ export default function NewTransaction({
         amount: amount.current.value,
         date: getDate(),
         type: transactionType,
+        dateObj: new Date()
       };
       title.current.value = "";
       amount.current.value = "";
       addTransaction(newTran);
       if (expenseIncomeHandler === "add") {
-        User.cash = Number(User.cash) + Number(newTran.amount);
+        UserInfo.cash = Number(UserInfo.cash) + Number(newTran.amount);
         setMonthlyIncome(Number(monthlyIncome) + Number(newTran.amount))
       } else if (expenseIncomeHandler === "subtract") {
         setMonthlyExpenses(Number(monthlyExpenses) + Number(newTran.amount))
-        User.cash = User.cash - newTran.amount;
+        UserInfo.cash = UserInfo.cash - newTran.amount;
         setAvailableSpending(availableSpending - newTran.amount)
         setMoneySpent(Number(moneySpent) + Number(newTran.amount))
         console.log(moneySpent)

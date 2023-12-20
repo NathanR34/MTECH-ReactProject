@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/system";
 import { Slider as BaseSlider, sliderClasses } from "@mui/base/Slider";
-import { User } from "../App";
+import { UserInfo } from "../App";
 import { useEffect, useState, createContext, useContext } from "react";
 import { blue, grey } from "@mui/material/colors";
 
@@ -26,22 +26,26 @@ export default function DiscreteSlider({
   setProjectedSavings,
   setAvailableSpending,
   projectedSavings,
+  setSavingsRatio
 }) {
   const { savingsValue, setSavingsValue } = useSavings();
   let numberOfPaychecksMonthly = 2
 
-  if(User.incomeFrequency === 'weekly'){
+  if(UserInfo.incomeFrequency === 'weekly'){
     numberOfPaychecksMonthly = 4
   }
 
     useEffect(() => {
-        setAvailableSpending( (User.income - projectedSavings) * numberOfPaychecksMonthly)
-        setProjectedSavings(User.income * (savingsValue * 0.01));
-    }, [projectedSavings, setAvailableSpending])
+        setProjectedSavings(UserInfo.income * (savingsValue * 0.01));
+    }, [projectedSavings, setProjectedSavings, savingsValue]);
+    useEffect(() => {
+      setAvailableSpending( (UserInfo.income - projectedSavings) * numberOfPaychecksMonthly)
+    }, [projectedSavings, numberOfPaychecksMonthly, setAvailableSpending]);
 
   const savingsHandler = (e) => {
     setSavingsValue(e.target.value);
-    setProjectedSavings(User.income * (e.target.value * 0.01));
+    setSavingsRatio(e.target.value*0.01);
+    setProjectedSavings(UserInfo.income * (e.target.value * 0.01));
   };
   function SliderValueLabel() {
     return <span className="valueLabel">{savingsValue}</span>;

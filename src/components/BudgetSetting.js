@@ -1,4 +1,4 @@
-import { User } from "../App";
+import { UserInfo } from "../App";
 import DiscreteSlider from "./Slider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -15,6 +15,7 @@ const BudgetPage = ({
   setProjectedSavings,
   setAvailableSpending,
   projectedSavings,
+  setSavingsRatio,
 }) => {
   let updatingDate = UseTime();
   const todaysDate = new Date().toISOString().split("T")[0];
@@ -82,7 +83,7 @@ const BudgetPage = ({
       <Paper className="mainPage" elevation={0} sx={{ bgcolor: grey[200] }}>
         <div className="budget-container">
           <Typography variant="h5">Personalize Your Budget Here</Typography>
-          {User.incomeFrequency === "bi-weekly" ? (
+          {UserInfo.incomeFrequency === "bi-weekly" ? (
             <div className="row-flex paidContainer">
               <p>When did you last get paid: </p>
               <span className="paycheck">
@@ -95,7 +96,7 @@ const BudgetPage = ({
               </span>
             </div>
           ) : null}
-          {User.incomeFrequency === "semi-monthly" ? (
+          {UserInfo.incomeFrequency === "semi-monthly" ? (
             <div className="paidContainer row-flex ">
               <p>When do you get paid?</p>
               <div className="paychecksContainer">
@@ -118,7 +119,7 @@ const BudgetPage = ({
             </div>
           ) : null}
           {upcomingPaycheck === true ? (
-            <div>Upcoming Paycheck {User.income}</div>
+            <div>Upcoming Paycheck {UserInfo.income}</div>
           ) : null}
           <Card className="center sliderContainer" variant="outlined">
             <CardContent>
@@ -129,6 +130,7 @@ const BudgetPage = ({
               <DiscreteSlider
                 key="discreteSlider"
                 setProjectedSavings={setProjectedSavings}
+                setSavingsRatio={setSavingsRatio}
                 projectedSavings={projectedSavings}
                 setAvailableSpending={setAvailableSpending}
               />

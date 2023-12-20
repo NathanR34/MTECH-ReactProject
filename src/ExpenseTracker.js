@@ -1,4 +1,4 @@
-import { User } from "./App";
+import { UserInfo } from "./App";
 import History from "./components/history";
 import NewTransaction from "./components/NewTransaction";
 import Paper from "@mui/material/Paper";
@@ -37,10 +37,10 @@ export default function ExpenseTracker({
             elevation={5}
           >
             <div className="row top">
-              <h1> Welcome {User.firstName} </h1>
+              <h1> Welcome {UserInfo.firstName} </h1>
               <Card className="balance flex" variant="outlined">
                 <h3>YOUR BALANCE</h3>
-                <h2>&#36;{addCommaToNumbers(User.cash)}</h2>
+                <h2>&#36;{addCommaToNumbers(UserInfo.cash)}</h2>
               </Card>
             </div>
             <div className="row income-expense-container">

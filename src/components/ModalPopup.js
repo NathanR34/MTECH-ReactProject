@@ -11,8 +11,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useState, useContext } from "react";
-import { User } from "../App";
+import { useState } from "react";
+import { UserInfo } from "../App";
 import { useMonthlyContext } from "../App";
 
 
@@ -35,11 +35,11 @@ export default function ModalPopup({ setIsLoggedIn }) {
     setMissingOpen(false);
   };
   const addUserName = (e) => {
-    User.firstName = e.target.value;
+    UserInfo.firstName = e.target.value;
   };
 
   const addCurrentMoney = (e) => {
-    User.cash = e.target.value;
+    UserInfo.cash = e.target.value;
   };
 
   
@@ -47,42 +47,42 @@ export default function ModalPopup({ setIsLoggedIn }) {
  
 
   const addIncomeFrequency = (e) => {
-    User.incomeFrequency = e.target.value;
+    UserInfo.incomeFrequency = e.target.value;
     console.log(e.target.value)
     setIncomeFrequencySelection(e.target.value)
    
   };
 
   const addIncome = (e) => {
-    User.income = e.target.value;
+    UserInfo.income = e.target.value;
   };
 
   const addUser = (e) => {
     e.preventDefault();
-    if (User.firstName === null || User.firstName === "") {
+    if (UserInfo.firstName === null || UserInfo.firstName === "") {
       missingInfo = true
       setMissingOpen(true)
     }
     else{
-      if (User.cash === null || User.cash === "") {
+      if (UserInfo.cash === null || UserInfo.cash === "") {
         missingInfo = true
         setMissingOpen(true)
       }
       else{
-        if (User.income === null || User.income === "") {
+        if (UserInfo.income === null || UserInfo.income === "") {
           missingInfo = true
           setMissingOpen(true)
         }  
         else{
 
-          if(User.incomeFrequency === 'bi-weekly'){
-            setMonthlyIncome((User.income) * 2)
+          if(UserInfo.incomeFrequency === 'bi-weekly'){
+            setMonthlyIncome((UserInfo.income) * 2)
           }
-          if(User.incomeFrequency === 'semi-monthly'){
-            setMonthlyIncome((User.income) * 2)
+          if(UserInfo.incomeFrequency === 'semi-monthly'){
+            setMonthlyIncome((UserInfo.income) * 2)
           }
-          if(User.incomeFrequency === 'weekly'){
-            setMonthlyIncome((User.income) * 4)
+          if(UserInfo.incomeFrequency === 'weekly'){
+            setMonthlyIncome((UserInfo.income) * 4)
           }
           missingInfo = false
         }
