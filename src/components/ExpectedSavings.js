@@ -235,6 +235,19 @@ function OverviewChart({historyArr, savingsRatio}){
     history.set(i, balance, action.dateObj);
   }
   console.log(history, currentTotal);
+  let debt = [...history.total.total];
+  let total = [...history.total.total];
+  let state = debt[0]>=0?1:0;
+  for(let i=0; i<debt.length; i++){
+    let current = total[i]>=0?1:0;
+    if(!(state||current)){
+      total[i] = null;
+    }
+    if(state && current){
+      debt[i] = null;
+    }
+    state = current;
+  }
   return <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
       <LineChart xAxis={[{
         id:"catagory",
@@ -242,8 +255,8 @@ function OverviewChart({historyArr, savingsRatio}){
         scaleType: "time"
       }]}
       series={[
-        {data:history.total.total.map((v,i,a)=>v>0?v:a[i-1]>0?null:v), area: true, color:"#000088", label:"total"},
-        {data:history.total.total.map((v,i,a)=>v<0?v:a[i-1]<0?null:v), area: true, color:"#FF0000", label:"debt"},
+        {data:debt, area: true, color:"#FF0000", label:"debt"},
+        {data:total, area: true, color:"#000088", label:"total"},
         {data:history.savings.total, area: false, color:"#00FFFF", label:"savings"},
         {data:history.total.increase, area: false, color:"#00FF00", label:"income"},
         {data:history.total.decrease.map((v)=>(v!==null)?-v:0), area: false, color:"#FF8800", label:"expense"}
